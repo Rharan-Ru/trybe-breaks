@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-
+    font-family: 'Press Start 2P', cursive;
 }
 
 :root {
@@ -9,7 +11,7 @@
 }
 
 #video-wrapper {
-    padding: 60px 30px 90px 30px;
+    padding: 50px 0px 80px 0px;
     display: flex;
     align-items: center;
     z-index: 0;
@@ -30,12 +32,12 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 #contain-video {
     width: 100%;
-    height: 100%;
+    height: 70vh;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -50,7 +52,7 @@
     user-select: none;
     z-index: -1;
     width: 100vw;
-    height: 100vw;
+    height: 200vw;
 }
 
 #youtube-music {
@@ -60,11 +62,12 @@
 #container-btn {
     display: flex;
     position: fixed;
-    bottom: 50px;
+    bottom: 8vh;
+    padding: 10px;
 }
 
 #container-btn .fa {
-    margin: 10px;
+    margin: 8px;
     font-size: 20px;
     color: white;
     cursor: pointer;
@@ -73,8 +76,8 @@
 #container-list {
     display: flex;
     position: fixed;
-    top: 5px;
-    right: 30px;
+    top: 2vh;
+    right: 4vh;
 }
 
 #container-list .fa {
@@ -84,6 +87,13 @@
     cursor: pointer;
 }
 
+#container-title {
+    display: flex;
+    position: fixed;
+    bottom: 20vh;
+    color: white;
+    font-size: small;
+}
 
 /* The side navigation menu, reference: https://www.w3schools.com/howto/howto_js_off-canvas.asp */
 .sidenav {
@@ -93,7 +103,7 @@
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: #111;
+    background-color: #000f0c;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -113,8 +123,9 @@
     color: #f1f1f1;
 }
 
-.sidenav .closebtn {
+.sidenav #close-navbar {
     position: absolute;
+    color: white;
     top: 0;
     right: 25px;
     font-size: 36px;
@@ -142,7 +153,7 @@ input[type=range] {
     height: 25px;
     margin: 10px 0;
     width: 100%;
-    background-color: #000f0c;
+    background-color: transparent;
 }
 
 input[type=range]:focus {

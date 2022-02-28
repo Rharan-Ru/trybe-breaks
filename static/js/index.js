@@ -19,6 +19,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
     event.target.setVolume(50);
+    document.getElementById('video-title').innerHTML = player.getVideoData().title;
 }
 
 // Video buttons control
@@ -41,6 +42,21 @@ function playPauseVideo() {
 
 function setVolume(event) {
     player.setVolume(event);
+    return;
+}
+
+function changeVideo(id) {
+    var ytVideoMusic = document.getElementById('youtube-music');
+    var videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
+
+    var newSrc;
+    if (!paused) {
+        newSrc = ytVideoMusic.src.replace('autoplay=0', 'autoplay=1').replace(videoId, id);
+        ytVideoMusic.src = newSrc;
+        return;
+    };
+    newSrc = ytVideoMusic.src.replace(videoId, id);
+    ytVideoMusic.src = newSrc;
     return;
 }
 
