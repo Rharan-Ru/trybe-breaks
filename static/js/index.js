@@ -55,7 +55,7 @@ function changeVideo(id) {
         ytVideoMusic.src = newSrc;
         return;
     };
-    newSrc = ytVideoMusic.src.replace(videoId, id);
+    newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
     ytVideoMusic.src = newSrc;
     return;
 }
