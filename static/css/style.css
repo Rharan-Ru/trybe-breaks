@@ -19,16 +19,6 @@
     transition: ease 1s;
 }
 
-/* #gif-background::before {
-    content: '';
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background-color: rgba(0, 0, 0, 0.9);
-} */
-
 #video-wrapper {
     display: flex;
     align-items: center;
@@ -123,6 +113,7 @@
     top: 0;
     right: 0;
     background-color: black;
+    opacity: 80%;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;

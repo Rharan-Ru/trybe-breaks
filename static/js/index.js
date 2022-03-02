@@ -65,6 +65,11 @@ function changeVideo(id) {
 
 // Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
 $(document).ready(function () {
+    const musicIds = [...document.querySelectorAll('#musics > a')].map(({
+        id
+    }) => id);
+
+    console.log(musicIds);
     // Giphy API defaults
     const giphy = {
         baseURL: "https://api.giphy.com/v1/gifs/",
@@ -108,6 +113,7 @@ $(document).ready(function () {
         var prev = 68;
         var gif = 71;
         var nextGif = 78;
+        var random = 82;
 
         var volRight = 39;
         var volLeft = 37;
@@ -139,6 +145,11 @@ $(document).ready(function () {
                 hasGif = true;
                 return hasGif;
             case nextGif:
+                newGif();
+                return;
+            case random:
+                var randomMusic = musicIds[Math.floor((Math.random()*musicIds.length))];
+                changeVideo(randomMusic);
                 newGif();
                 return;
         }
