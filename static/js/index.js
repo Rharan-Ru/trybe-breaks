@@ -60,51 +60,93 @@ function changeVideo(id) {
     newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
     ytVideoMusic.src = newSrc;
     return;
-}
-
-// Activate functions in keyboard press
-
-document.onkeydown = keyPressed;
-
-function keyPressed(k) {
-    console.log(k);
-    var pause = 80;
-    var random = 82;
-    var next = 65;
-    var prev = 68;
-    var gif = 71;
-
-    var volRight = 39;
-    var volLeft = 37;
-    switch (k.keyCode) {
-        case pause:
-            playPauseVideo();
-            return;
-        case volRight:
-            var actualVol = player.getVolume();
-            actualVol === 100 ? actualVol = 100 : actualVol += 10;
-            console.log(actualVol);
-            document.getElementById('volume').value = actualVol;
-            player.setVolume(actualVol);
-            return
-        case volLeft:
-            var actualVol = player.getVolume();
-            actualVol === 0 ? actualVol = 0 : actualVol -= 10;
-            console.log(actualVol);
-            document.getElementById('volume').value = actualVol;
-            player.setVolume(actualVol);
-            return;
-        case gif:
-            if (hasGif) {
-                document.getElementById('gif-background').style = 'opacity: 0;';
-                hasGif = false;
-                return hasGif;
-            }
-            document.getElementById('gif-background').style = 'opacity: 100%;';
-            hasGif = true;
-            return hasGif;
-    }
 };
+
+
+// Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
+$(document).ready(function () {
+    // Giphy API defaults
+    const giphy = {
+        baseURL: "https://api.giphy.com/v1/gifs/",
+        apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
+        tag: "lofi-anime",
+        type: "random",
+        rating: "pg-13"
+    };
+    // Target gif-wrap container
+    var gifBack = document.getElementById('gif-background');
+    // Giphy API URL
+    let giphyURL = encodeURI(
+        giphy.baseURL +
+        giphy.type +
+        "?api_key=" +
+        giphy.apiKey +
+        "&tag=" +
+        giphy.tag +
+        "&rating=" +
+        giphy.rating
+    );
+
+    // Call Giphy API and render data
+    var newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
+
+    // Display Gif in gif wrap container
+    var renderGif = _giphy => {
+        console.log(_giphy);
+        // Set gif as bg image
+        gifBack.style.backgroundImage = "url(" + _giphy.images.original.url + ")";
+    };
+    newGif();
+
+    document.onkeydown = keyPressed;
+
+    function keyPressed(k) {
+        console.log(k);
+        var pause = 80;
+        var random = 82;
+        var next = 65;
+        var prev = 68;
+        var gif = 71;
+        var nextGif = 78;
+
+        var volRight = 39;
+        var volLeft = 37;
+        switch (k.keyCode) {
+            case pause:
+                playPauseVideo();
+                return;
+            case volRight:
+                var actualVol = player.getVolume();
+                actualVol === 100 ? actualVol = 100 : actualVol += 10;
+                console.log(actualVol);
+                document.getElementById('volume').value = actualVol;
+                player.setVolume(actualVol);
+                return
+            case volLeft:
+                var actualVol = player.getVolume();
+                actualVol === 0 ? actualVol = 0 : actualVol -= 10;
+                console.log(actualVol);
+                document.getElementById('volume').value = actualVol;
+                player.setVolume(actualVol);
+                return;
+            case gif:
+                if (hasGif) {
+                    document.getElementById('gif-background').style.opacity = '0';
+                    hasGif = false;
+                    return hasGif;
+                };
+                document.getElementById('gif-background').style.opacity = '1';
+                hasGif = true;
+                return hasGif;
+            case nextGif:
+                newGif();
+                return;
+        }
+    };
+    return;
+});
+
+
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
@@ -116,4 +158,9 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
+}
+
+// Change gif animation
+function changeGif() {
+    document.getElementById('gif-background').style = 'opacity: 0;';
 }

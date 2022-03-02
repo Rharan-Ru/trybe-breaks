@@ -11,7 +11,6 @@
 }
 
 #gif-background {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5a/Animated_Wallpaper_Windows_10_-_Wallpaper_Engine.gif');
     height: 100vh;
     width: 100%;
     position: fixed;
@@ -19,6 +18,16 @@
     background-position: center;
     transition: ease 1s;
 }
+
+/* #gif-background::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.9);
+} */
 
 #video-wrapper {
     display: flex;

@@ -10,6 +10,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/index.js' %}"></script>
 
 </head>
@@ -22,10 +23,8 @@
 
     </div>
 
-    <!-- Use any element to open the sidenav -->
     <span onclick="openNav()">open</span>
 
-    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="main">
         <div id="video-wrapper">
             <img id="gif-background" src="" alt="">
@@ -55,6 +54,60 @@
             </div>
         </div>
     </div>
+    <!-- <div id="gif-wrap">
+        <div id="gif-logo">
+            <img src="https://storage.googleapis.com/chydlx/codepen/random-gif-generator/giphy-logo.gif" alt="">
+        </div>
+
+
+        <button id="new-gif">New Gif</button>
+
+        <style>
+            #gif-wrap {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                background-color: #000;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                z-index: -1;
+            }
+
+            #gif-logo {
+                position: fixed;
+                top: .5rem;
+                right: .5rem;
+                border-radius: 30px;
+                padding: 0 1rem;
+                background: #000;
+            }
+
+            img {
+                max-width: 150px;
+            }
+
+            #new-gif {
+                padding: .75rem 2.5rem;
+                font-weight: 600;
+                background: #424242;
+                z-index: 10;
+                color: #fff;
+                border-radius: 30px;
+                border: 0;
+                font-size: 14px;
+                position: fixed;
+                top: .5rem;
+                left: .5rem;
+                transition: background .15s ease;
+                cursor: pointer;
+            }
+        </style>
+    </div> -->
+
 </body>
 
 </html>
