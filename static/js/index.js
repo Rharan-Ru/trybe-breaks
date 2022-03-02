@@ -24,6 +24,7 @@ function onPlayerReady(event) {
 
 // Video buttons control
 var paused = true;
+var hasGif = true;
 
 function playPauseVideo() {
     var play = document.getElementById('play-pause-video');
@@ -46,6 +47,7 @@ function setVolume(event) {
 }
 
 function changeVideo(id) {
+    closeNav();
     var ytVideoMusic = document.getElementById('youtube-music');
     var videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
 
@@ -65,11 +67,12 @@ function changeVideo(id) {
 document.onkeydown = keyPressed;
 
 function keyPressed(k) {
-    // console.log(k);
+    console.log(k);
     var pause = 80;
     var random = 82;
     var next = 65;
     var prev = 68;
+    var gif = 71;
 
     var volRight = 39;
     var volLeft = 37;
@@ -90,7 +93,16 @@ function keyPressed(k) {
             console.log(actualVol);
             document.getElementById('volume').value = actualVol;
             player.setVolume(actualVol);
-            return
+            return;
+        case gif:
+            if (hasGif) {
+                document.getElementById('gif-background').style = 'opacity: 0;';
+                hasGif = false;
+                return hasGif;
+            }
+            document.getElementById('gif-background').style = 'opacity: 100%;';
+            hasGif = true;
+            return hasGif;
     }
 };
 
@@ -98,12 +110,10 @@ function keyPressed(k) {
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "white";
 }

@@ -11,12 +11,13 @@
 }
 
 #gif-background {
-    /* background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5a/Animated_Wallpaper_Windows_10_-_Wallpaper_Engine.gif'); */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5a/Animated_Wallpaper_Windows_10_-_Wallpaper_Engine.gif');
     height: 100vh;
     width: 100%;
     position: fixed;
     background-size: cover;
     background-position: center;
+    transition: ease 1s;
 }
 
 #video-wrapper {
@@ -50,7 +51,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
 }
 
 #pointer-events {
@@ -121,21 +121,25 @@
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 22px;
+    color: green;
     display: block;
     transition: 0.3s;
+    cursor: pointer;
+    border-bottom: white;
 }
 
 .sidenav a:hover {
     color: #f1f1f1;
+    background-color: #036b52;
 }
 
 .sidenav #close-navbar {
     position: absolute;
     color: white;
+    background-color: transparent;
     top: 0;
     right: 25px;
     font-size: 36px;
