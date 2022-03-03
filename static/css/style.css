@@ -78,6 +78,13 @@
     font-size: 20px;
     color: white;
     cursor: pointer;
+    transition: all 1s ease;
+}
+
+#container-btn .fa:hover {
+    transition: 0s;
+    color: #2bfd0f;
+    text-shadow: 0 0 25px #2bfd0f;
 }
 
 #container-list {
@@ -85,6 +92,19 @@
     position: fixed;
     top: 2vh;
     right: 4vh;
+    transition: all 1s ease;
+
+}
+
+#container-list .fa:hover {
+    transition: all 1s ease;
+    color: white;
+}
+
+#container-list .fa:hover {
+    transition: 0s;
+    color: #2bfd0f;
+    text-shadow: 0 0 25px #2bfd0f;
 }
 
 #container-list .fa {
@@ -92,6 +112,7 @@
     font-size: 30px;
     color: white;
     cursor: pointer;
+
 }
 
 #container-title {
@@ -113,7 +134,7 @@
     top: 0;
     right: 0;
     background-color: black;
-    opacity: 80%;
+    opacity: 70%;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -123,23 +144,28 @@
 .sidenav a {
     padding: 8px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 14px;
     color: green;
     display: block;
-    transition: 0.3s;
+    transition: all 1s ease;
     cursor: pointer;
     border-bottom: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
 }
 
 .sidenav a:hover {
-    color: #f1f1f1;
-    background-color: #036b52;
+    transition: 0s;
+    color: #2bfd0f;
+    text-shadow: 0 0 12px #2bfd0f;
 }
 
 .sidenav #close-navbar {
     position: absolute;
-    color: white;
-    background-color: transparent;
+    transition: 1s;
+    color: #2bfd0f;
     top: 0;
     right: 25px;
     font-size: 36px;
@@ -227,4 +253,64 @@ input[type=range]::-ms-track {
     background: transparent;
     border-color: transparent;
     color: transparent;
+}
+
+
+/* Music beat animation */
+.playing {
+    background: transparent;
+    width: 20%;
+    height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: .5rem;
+    box-sizing: border-box;
+}
+
+.playing-bar {
+    display: inline-block;
+    background: white;
+    width: 40%;
+    height: 100%;
+    animation: up-and-down 2.3s ease infinite alternate;
+}
+
+.playing-bar1 {
+    height: 60%;
+    background-color: #2bfd0f;
+}
+
+.playing-bar2 {
+    height: 30%;
+    background-color: aqua;
+    animation-delay: -2.2s;
+}
+
+.playing-bar3 {
+    background-color: blueviolet;
+    height: 75%;
+    animation-delay: -3.7s;
+}
+
+@keyframes up-and-down {
+    10% {
+        height: 30%;
+    }
+
+    30% {
+        height: 100%;
+    }
+
+    60% {
+        height: 50%;
+    }
+
+    80% {
+        height: 75%;
+    }
+
+    100% {
+        height: 60%;
+    }
 }

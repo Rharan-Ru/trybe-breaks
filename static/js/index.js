@@ -19,13 +19,13 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
     event.target.setVolume(50);
-    document.getElementById('video-title').innerHTML = player.getVideoData().title;
 }
 
 // Video buttons control
 var paused = true;
 var hasGif = true;
 
+// This function play and pause video by you state reference
 function playPauseVideo() {
     var play = document.getElementById('play-pause-video');
     if (paused) {
@@ -40,12 +40,13 @@ function playPauseVideo() {
     return paused;
 }
 
-
+// Set volume player
 function setVolume(event) {
     player.setVolume(event);
     return;
 }
 
+// Change video by id
 function changeVideo(id) {
     closeNav();
     var ytVideoMusic = document.getElementById('youtube-music');
@@ -62,10 +63,39 @@ function changeVideo(id) {
     return;
 };
 
+// Get a random video-music
+function randomVideo() {
+    var randomMusic = musicIds[Math.floor((Math.random() * musicIds.length))];
+    changeVideo(randomMusic);
+    newGif();
+};
+
+// Switch to original video
+function getOriginalVideo() {
+    if (hasGif) {
+        document.getElementById('gif-background').style.opacity = '0';
+        hasGif = false;
+        return hasGif;
+    };
+    document.getElementById('gif-background').style.opacity = '1';
+    hasGif = true;
+}
+
+// Change gif animation
+function changeGif() {
+    document.getElementById('gif-background').style = 'opacity: 0;';
+}
+
+// Change vars by ready function 
+var gifBack;
+var giphyURL;
+var newGif;
+var renderGif;
+var musicIds = [];
 
 // Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
 $(document).ready(function () {
-    const musicIds = [...document.querySelectorAll('#musics > a')].map(({
+    musicIds = [...document.querySelectorAll('#musics > a')].map(({
         id
     }) => id);
 
@@ -74,34 +104,53 @@ $(document).ready(function () {
     const giphy = {
         baseURL: "https://api.giphy.com/v1/gifs/",
         apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
-        tag: "lofi-anime",
+        tag: "anime-manga",
         type: "random",
-        rating: "pg-13"
     };
     // Target gif-wrap container
-    var gifBack = document.getElementById('gif-background');
+    gifBack = document.getElementById('gif-background');
     // Giphy API URL
-    let giphyURL = encodeURI(
+    giphyURL = encodeURI(
         giphy.baseURL +
         giphy.type +
         "?api_key=" +
         giphy.apiKey +
         "&tag=" +
-        giphy.tag +
-        "&rating=" +
-        giphy.rating
+        giphy.tag
     );
 
     // Call Giphy API and render data
-    var newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
+    newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
 
     // Display Gif in gif wrap container
-    var renderGif = _giphy => {
-        console.log(_giphy);
+    renderGif = _giphy => {
         // Set gif as bg image
         gifBack.style.backgroundImage = "url(" + _giphy.images.original.url + ")";
     };
     newGif();
+});
+
+var hasStarted = false;
+if (hasStarted === false) {
+    document.onkeydown = keyPressed;
+    document.onclick = clickEvent;
+
+    function keyPressed(k) {
+        if (hasStarted === false) {
+            start();
+        }
+    };
+
+    function clickEvent(k) {
+        if (hasStarted === false) {
+            start();
+        }
+    };
+};
+
+function start() {
+    document.getElementById('video-title').innerHTML = player.getVideoData().title;
+    playPauseVideo();
 
     document.onkeydown = keyPressed;
 
@@ -120,58 +169,48 @@ $(document).ready(function () {
         switch (k.keyCode) {
             case pause:
                 playPauseVideo();
-                return;
+                break;
             case volRight:
                 var actualVol = player.getVolume();
                 actualVol === 100 ? actualVol = 100 : actualVol += 10;
                 console.log(actualVol);
                 document.getElementById('volume').value = actualVol;
                 player.setVolume(actualVol);
-                return
+                break;
             case volLeft:
                 var actualVol = player.getVolume();
                 actualVol === 0 ? actualVol = 0 : actualVol -= 10;
                 console.log(actualVol);
                 document.getElementById('volume').value = actualVol;
                 player.setVolume(actualVol);
-                return;
+                break;
             case gif:
-                if (hasGif) {
-                    document.getElementById('gif-background').style.opacity = '0';
-                    hasGif = false;
-                    return hasGif;
-                };
-                document.getElementById('gif-background').style.opacity = '1';
-                hasGif = true;
-                return hasGif;
+                getOriginalVideo();
+                break;
             case nextGif:
                 newGif();
-                return;
+                break;
             case random:
-                var randomMusic = musicIds[Math.floor((Math.random()*musicIds.length))];
-                changeVideo(randomMusic);
-                newGif();
-                return;
-        }
+                randomVideo();
+                break;
+        };
     };
-    return;
-});
-
+    return hasStarted = true;
+};
 
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("open-nav").style.opacity = '0';
+    document.getElementById("close-navbar").style.opacity = '100%';
+    document.getElementById("mySidenav").style.width = "300px";
+    document.getElementById("main").style.marginLeft = "300px";
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
+    document.getElementById("open-nav").style.opacity = '100%';
+    document.getElementById("close-navbar").style.opacity = '0';
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
-}
-
-// Change gif animation
-function changeGif() {
-    document.getElementById('gif-background').style = 'opacity: 0;';
 }
