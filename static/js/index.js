@@ -3,6 +3,7 @@
 var tag = document.createElement('script');
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
+var playerVolume = 50;
 
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -18,7 +19,11 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-    event.target.setVolume(50);
+    event.target.setVolume(playerVolume);
+    if (hasStarted) {
+        document.getElementById('video-title').innerHTML = player.getVideoData().title;
+    }
+    return;
 }
 
 // Video buttons control
@@ -51,16 +56,19 @@ function changeVideo(id) {
     closeNav();
     var ytVideoMusic = document.getElementById('youtube-music');
     var videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
-
     var newSrc;
-    if (!paused) {
-        newSrc = ytVideoMusic.src.replace('autoplay=0', 'autoplay=1').replace(videoId, id);
-        ytVideoMusic.src = newSrc;
+
+    try {
+        if (!paused) {
+            newSrc = ytVideoMusic.src.replace('autoplay=0', 'autoplay=1').replace(videoId, id);
+            ytVideoMusic.src = newSrc;
+        } else {
+            newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
+            ytVideoMusic.src = newSrc;
+        }
+    } finally {
         return;
-    };
-    newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
-    ytVideoMusic.src = newSrc;
-    return;
+    }
 };
 
 // Get a random video-music
@@ -149,8 +157,8 @@ if (hasStarted === false) {
 };
 
 function start() {
-    document.getElementById('video-title').innerHTML = player.getVideoData().title;
     playPauseVideo();
+    document.getElementById('video-title').innerHTML = player.getVideoData().title;
 
     document.onkeydown = keyPressed;
 
@@ -171,18 +179,14 @@ function start() {
                 playPauseVideo();
                 break;
             case volRight:
-                var actualVol = player.getVolume();
-                actualVol === 100 ? actualVol = 100 : actualVol += 10;
-                console.log(actualVol);
-                document.getElementById('volume').value = actualVol;
-                player.setVolume(actualVol);
+                playerVolume === 100 ? playerVolume = 100 : playerVolume += 10;
+                document.getElementById('volume').value = playerVolume;
+                player.setVolume(playerVolume);
                 break;
             case volLeft:
-                var actualVol = player.getVolume();
-                actualVol === 0 ? actualVol = 0 : actualVol -= 10;
-                console.log(actualVol);
-                document.getElementById('volume').value = actualVol;
-                player.setVolume(actualVol);
+                playerVolume === 0 ? playerVolume = 0 : playerVolume -= 10;
+                document.getElementById('volume').value = playerVolume;
+                player.setVolume(playerVolume);
                 break;
             case gif:
                 getOriginalVideo();
