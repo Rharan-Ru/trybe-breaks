@@ -96,23 +96,18 @@
 
 }
 
-#container-list .fa:hover {
-    transition: all 1s ease;
-    color: white;
-}
-
-#container-list .fa:hover {
-    transition: 0s;
-    color: #2bfd0f;
-    text-shadow: 0 0 25px #2bfd0f;
-}
-
 #container-list .fa {
     margin: 10px;
     font-size: 30px;
     color: white;
     cursor: pointer;
 
+}
+
+#container-list .fa:hover {
+    transition: 0s;
+    color: #2bfd0f;
+    text-shadow: 0 0 25px #2bfd0f;
 }
 
 #container-title {
@@ -154,6 +149,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 90%;
+}
+
+.sidenav .activate {
+    background-color: rgb(32, 18, 160);
 }
 
 .sidenav a:hover {

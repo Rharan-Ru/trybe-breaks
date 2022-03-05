@@ -22,6 +22,9 @@
             <a id="Uv9URjIBtUQ" onclick="changeVideo(this.id)">Chill Vibes</a>
             <a id="-5KAN9_CzSA" onclick="changeVideo(this.id)">Coffe Shop Radio</a>
             <a id="5qap5aO4i9A" onclick="changeVideo(this.id)">Lofi</a>
+            {% for music in musics %}
+                <a id="{{music.music_id}}" onclick="changeVideo(this.id)">{{music.title}}</a>
+            {% endfor %}
         </nav>
     </aside>
 
@@ -32,7 +35,7 @@
                 <div id="pointer-events">
                     <div style="width: 100%; height: 100%">
                         <iframe id="youtube-music" width="100%" height="100%" title="Youtube Music Video"
-                            src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=0&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1&playerapiid=ytplayer">
+                            src="https://www.youtube.com/embed/ZeBrnuQxEsQ?autoplay=0&mute=0&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1&playerapiid=ytplayer">
                         </iframe>
                     </div>
                 </div>

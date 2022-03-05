@@ -53,7 +53,10 @@ function setVolume(event) {
 
 // Change video by id
 function changeVideo(id) {
-    closeNav();
+    currentMusic.className = '';
+    currentMusic = document.getElementById(id);
+    currentMusic.className = 'activate';
+
     var ytVideoMusic = document.getElementById('youtube-music');
     var videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
     var newSrc;
@@ -100,19 +103,22 @@ var giphyURL;
 var newGif;
 var renderGif;
 var musicIds = [];
+var currentMusic;
 
 // Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
 $(document).ready(function () {
     musicIds = [...document.querySelectorAll('#musics > a')].map(({
         id
     }) => id);
+    currentMusic = document.getElementById(musicIds[0]);
+    currentMusic.className = 'activate';
 
-    console.log(musicIds);
     // Giphy API defaults
     const giphy = {
         baseURL: "https://api.giphy.com/v1/gifs/",
         apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
-        tag: "anime-manga",
+        // tag: "eniac",
+        tag: "8bit-art",
         type: "random",
     };
     // Target gif-wrap container
@@ -166,8 +172,8 @@ function start() {
         console.log(k);
         var pause = 80;
         var random = 82;
-        var next = 65;
-        var prev = 68;
+        var next = 68;
+        var prev = 65;
         var gif = 71;
         var nextGif = 78;
         var random = 82;
@@ -197,6 +203,12 @@ function start() {
             case random:
                 randomVideo();
                 break;
+            case next:
+                nextMusic();
+                break;
+            case prev:
+                prevMusic();
+                break;
         };
     };
     return hasStarted = true;
@@ -218,3 +230,25 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
 };
+
+function nextMusic() {
+    currentMusic.className = '';
+    currentMusic = currentMusic.nextElementSibling;
+    if (currentMusic === null) {
+        currentMusic = document.getElementById(musicIds[0]);
+    };
+    currentMusic.className = 'activate';
+    changeVideo(currentMusic.id);
+    return;
+}
+
+function prevMusic() {
+    currentMusic.className = '';
+    currentMusic = currentMusic.previousElementSibling;
+    if (currentMusic === null) {
+        currentMusic = document.getElementById(musicIds[musicIds.length - 1]);
+    };
+    currentMusic.className = 'activate';
+    changeVideo(currentMusic.id);
+    return;
+}
