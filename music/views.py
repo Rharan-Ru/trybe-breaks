@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.views import View
-
-# Create your views here.
+from .models import PlaylistModel, MusicModel
 
 
 class MusicView(View):
     def get(self, request):
-        return render(request, 'music/index.html')
+        musics = MusicModel.objects.all()
+        context = {
+            'musics': musics,
+        }
+        return render(request, 'music/index.html', context)
