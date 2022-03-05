@@ -43,13 +43,13 @@ function playPauseVideo() {
     player.pauseVideo();
     paused = true;
     return paused;
-}
+};
 
 // Set volume player
 function setVolume(event) {
     player.setVolume(event);
     return;
-}
+};
 
 // Change video by id
 function changeVideo(id) {
@@ -68,7 +68,7 @@ function changeVideo(id) {
         }
     } finally {
         return;
-    }
+    };
 };
 
 // Get a random video-music
@@ -87,12 +87,12 @@ function getOriginalVideo() {
     };
     document.getElementById('gif-background').style.opacity = '1';
     hasGif = true;
-}
+};
 
 // Change gif animation
 function changeGif() {
     document.getElementById('gif-background').style = 'opacity: 0;';
-}
+};
 
 // Change vars by ready function 
 var gifBack;
@@ -209,7 +209,7 @@ function openNav() {
     document.getElementById("close-navbar").style.opacity = '100%';
     document.getElementById("mySidenav").style.width = "300px";
     document.getElementById("main").style.marginLeft = "300px";
-}
+};
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
@@ -217,4 +217,4 @@ function closeNav() {
     document.getElementById("close-navbar").style.opacity = '0';
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
-}
+};
