@@ -10,3 +10,12 @@ class MusicView(View):
             'musics': musics,
         }
         return render(request, 'music/index.html', context)
+
+
+class PlayListView(View):
+    def get(self, request):
+        playlists = PlaylistModel.objects.all()
+        context = {
+            'playlists': playlists,
+        }
+        return render(request, 'music/playlists.html', context)

@@ -1,7 +1,8 @@
-from .views import MusicView
+from .views import MusicView, PlayListView
 from django.urls import path
 
 
 urlpatterns = [
-    path('', MusicView.as_view(), name='music-view'),
+    path('musics', MusicView.as_view(), name='music-view'),
+    path('', PlayListView.as_view(), name='playlist-view'),
 ]

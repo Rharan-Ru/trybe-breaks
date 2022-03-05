@@ -23,7 +23,7 @@
             <a id="-5KAN9_CzSA" onclick="changeVideo(this.id)">Coffe Shop Radio</a>
             <a id="5qap5aO4i9A" onclick="changeVideo(this.id)">Lofi</a>
             {% for music in musics %}
-                <a id="{{music.music_id}}" onclick="changeVideo(this.id)">{{music.title}}</a>
+            <a id="{{music.music_id}}" onclick="changeVideo(this.id)">{{music.title}}</a>
             {% endfor %}
         </nav>
     </aside>
@@ -52,8 +52,8 @@
 
                 <a id="play-pause-video" title="play/pause" onclick="playPauseVideo()"><i class="fa fa-play"></i></a>
                 <a id="random-video" title="random music" onclick="randomVideo()"><i class="fa fa-random"></i></a>
-                <a id="back-video" title="prev music"><i class="fa fa-step-backward"></i></a>
-                <a id="front-video" title="next music"><i class="fa fa-step-forward"></i></a>
+                <a id="back-video" title="prev music" onclick="prevMusic()"><i class="fa fa-step-backward"></i></a>
+                <a id="front-video" title="next music" onclick="nextMusic()"><i class="fa fa-step-forward"></i></a>
                 <a id="new-gif" title="new gif" onclick="newGif()"><i class="fa fa-heart"></i></a>
                 <a id="original-video" title="original video" onclick="getOriginalVideo()"><i
                         class="fa fa-star"></i></a>
