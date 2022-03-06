@@ -66,27 +66,6 @@
     border: none;
 }
 
-#container-btn {
-    display: flex;
-    position: fixed;
-    bottom: 8vh;
-    padding: 10px;
-}
-
-#container-btn .fa {
-    margin: 8px;
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    transition: all 1s ease;
-}
-
-#container-btn .fa:hover {
-    transition: 0s;
-    color: #2bfd0f;
-    text-shadow: 0 0 25px #2bfd0f;
-}
-
 #container-list {
     display: flex;
     position: fixed;
@@ -110,13 +89,41 @@
     text-shadow: 0 0 25px #2bfd0f;
 }
 
+#container-btn {
+    position: fixed;
+    bottom: 8vh;
+    padding: 10px;
+}
+
+#container-btn .fa {
+    margin: 8px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 1s ease;
+}
+
+#container-btn .fa:hover {
+    transition: 0s;
+    color: #2bfd0f;
+    text-shadow: 0 0 25px #2bfd0f;
+}
+
+#buttons-wrap {
+    display: flex;
+}
+
+#volume-wrap {
+    display: flex;
+}
+
 #container-title {
     display: flex;
-    position: fixed;
-    bottom: 3vh;
     color: white;
     font-size: small;
     padding: 10px;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -176,21 +183,11 @@
     padding: 20px;
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 15px;
-    }
-
-    .sidenav a {
-        font-size: 18px;
-    }
-}
-
 /* Volume input css style from this reference https://www.cssportal.com/style-input-range/ */
 
 input[type=range] {
     height: 25px;
-    margin: 10px 0;
+    margin: 8px 0;
     width: 100%;
     background-color: transparent;
 }
@@ -258,8 +255,8 @@ input[type=range]::-ms-track {
 /* Music beat animation */
 .playing {
     background: transparent;
-    width: 20%;
-    height: 2rem;
+    width: 50px;
+    height: 2.4rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -311,5 +308,28 @@ input[type=range]::-ms-track {
 
     100% {
         height: 60%;
+    }
+}
+
+/* Responsive ajusts */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #container-title {
+        font-size: 10px;
+    }
+
+    .playing {
+        width: 70px;
+        height: 2.8rem;
     }
 }
