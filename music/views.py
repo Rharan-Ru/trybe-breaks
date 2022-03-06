@@ -5,10 +5,10 @@ import requests
 
 
 class MusicView(View):
-    def get(self, request):
-        musics = MusicModel.objects.all()
+    def get(self, request, slug):
+        playlist = PlaylistModel.objects.get(slug=slug)
         context = {
-            'musics': musics,
+            'playlist': playlist,
         }
         return render(request, 'music/index.html', context)
 

@@ -19,7 +19,7 @@
     <aside id="mySidenav" class="sidenav">
         <a id="close-navbar" onclick="closeNav()"><i class="fa fa-close"></i></a>
         <nav id="musics">
-            {% for music in musics %}
+            {% for music in playlist.musics.all %}
             <a id="{{music.music_id}}" onclick="changeVideo(this.id)">{{music.title}}</a>
             {% endfor %}
         </nav>

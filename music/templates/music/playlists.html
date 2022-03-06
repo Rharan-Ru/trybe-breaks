@@ -27,81 +27,32 @@
 
         <article id="playlists-container">
             <div class="playlists-wrap">
+                {% for playlist in playlists %}
                 <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
+                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
+                        class="playlist-background" />
+                    <a href="musics/{{playlist.slug}}"><p>{{ playlist.title }}</p></a>
+                </div>
+                {% endfor %}
+                <div class="playlist">
+                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
+                        class="playlist-background" />
+                    <p>Lofi Playlist</p>
                 </div>
                 <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
+                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
+                        class="playlist-background" />
+                    <p>Lofi Playlist</p>
                 </div>
                 <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
+                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
+                        class="playlist-background" />
+                    <p>Lofi Playlist</p>
                 </div>
                 <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-background" />
-                    <h1>Teste</h1>
+                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
+                        class="playlist-background" />
+                    <p>Lofi Playlist</p>
                 </div>
             </div>
         </article>

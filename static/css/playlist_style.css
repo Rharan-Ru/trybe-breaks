@@ -78,9 +78,50 @@
 #playlists-container .playlist {
     display: inline-flex;
     width: 28%;
-    height: 30vh;
-    border: 1px solid white;
-    border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    color: white;
+}
+
+.playlist-background {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 20px;
+    border: .5px solid white;
+    object-fit: cover;
+    object-position: center;
+    transition: all ease .6s;
+}
+
+.playlist-background:hover {
+    background-color: #2bfd0f;
+    box-shadow: 0 0 25px #2bfd0f;
+    transition: 0;
+}
+
+#playlists-container .playlist a,
+p {
+    background-color: transparent;
+    text-decoration: none;
+    color: white;
+}
+
+#playlists-container .playlist p:after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: center;
+    display: block;
+    background-color: #2bfd0f;
+    box-shadow: 0 0 25px #2bfd0f;
+    transition: all .6s ease;
+}
+
+#playlists-container .playlist p:hover:after {
+    transform: scaleX(1);
+    transform-origin: center;
 }
