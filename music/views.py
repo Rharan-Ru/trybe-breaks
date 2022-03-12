@@ -16,6 +16,12 @@ class MusicView(View):
 class PlayListView(View):
     def get(self, request):
         playlists = PlaylistModel.objects.all()
+        # for x in range(12):
+        #     new = PlaylistModel.objects.create(
+        #         title = playlists[0].title + str(x),
+        #         author = "monke",
+        #     )
+        #     new.save()
         context = {
             'playlists': playlists,
         }

@@ -145,7 +145,7 @@
 }
 
 /* The navigation menu links */
-.sidenav a {
+.sidenav a, nav {
     padding: 8px;
     text-decoration: none;
     font-size: 14px;
@@ -157,7 +157,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 90%;
 }
 
 .sidenav .activate {

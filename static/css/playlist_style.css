@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* {
+body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
@@ -8,120 +8,35 @@
 }
 
 #header {
-    background-color: rgb(0, 0, 0);
-    height: 45px;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-}
-
-#header h3 {
     color: white;
-    background-color: transparent;
-    padding: 10px;
-}
-
-.items-wrap {
-    width: 100%;
-    background-color: transparent;
-    padding: 8px;
-    position: -webkit-sticky;
-    top: 0;
-}
-
-#perfil-container {
-    top: 0;
-    padding-top: 45px;
-    height: 100vh;
-    width: 20%;
-    position: fixed;
-    display: inline-flex;
-    background-color: rgb(26, 26, 26);
-    overflow-x: hidden;
-    z-index: 0;
 }
 
 #avatar {
-    width: 100%;
+    object-fit: cover;
+    object-position: center;
     height: 40vh;
-    border-radius: 20px;
+    border-radius: 15px;
+}
+
+.card {
+    background-color: transparent;
+    /* max-height: 200px; */
+    height: auto;
+}
+
+.card:hover {
+    opacity: 0.7;
+    transform: scale(0.98);
+    transition: all ease .5s;
+}
+
+.playlist-thumb {
     border: 1px solid white;
-    box-shadow: 0px 0px 14px 5px rgba(0, 255, 136, 0.7);
-    object-fit: cover;
-    object-position: center;
-    transition: all ease .6s;
 }
 
-#avatar:hover {
-    box-shadow: 0px 0px 20px 5px rgba(153, 0, 255, 0.7);
-    transition: all ease .6s;
-    cursor: pointer;
-}
-
-#playlists-container {
-    display: inline-block;
-    position: relative;
-    width: 80%;
-    height: 100%;
-    left: 20%;
-}
-
-.playlists-wrap {
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
-}
-
-#playlists-container .playlist {
-    display: inline-flex;
-    width: 28%;
-    padding: 10px;
-    flex-direction: column;
-    align-items: center;
-    font-size: 15px;
-    color: white;
-}
-
-.playlist-background {
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
-    border-radius: 20px;
-    border: .5px solid white;
-    object-fit: cover;
-    object-position: center;
-    transition: all ease .6s;
-}
-
-.playlist-background:hover {
-    background-color: #2bfd0f;
-    box-shadow: 0 0 25px #2bfd0f;
-    transition: 0;
-}
-
-#playlists-container .playlist a,
-p {
-    background-color: transparent;
+.card-body a {
     text-decoration: none;
     color: white;
-}
-
-#playlists-container .playlist p:after {
-    content: '';
-    height: 2px;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: center;
-    display: block;
-    background-color: #2bfd0f;
-    box-shadow: 0 0 25px #2bfd0f;
-    transition: all .6s ease;
-}
-
-#playlists-container .playlist p:hover:after {
-    transform: scaleX(1);
-    transform-origin: center;
-}
+    font-size: 10px;
+    text-align: justify;
+} 

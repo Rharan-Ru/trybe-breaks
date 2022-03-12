@@ -1,73 +1,59 @@
+{% extends 'navbar.html' %}
 {% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'js/index.js' %}"></script>
+    
+<aside id="mySidenav" class="sidenav">
+    <a id="close-navbar" onclick="closeNav()"><i class="fa fa-close"></i></a>
+    <nav id="musics">
+        {% for music in playlist.musics.all %}
+        <a id="{{music.music_id}}" onclick="changeVideo(this.id)">{{music.title}}</a>
+        {% endfor %}
+    </nav>
+</aside>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'js/index.js' %}"></script>
-
-</head>
-
-<body>
-    <aside id="mySidenav" class="sidenav">
-        <a id="close-navbar" onclick="closeNav()"><i class="fa fa-close"></i></a>
-        <nav id="musics">
-            {% for music in playlist.musics.all %}
-            <a id="{{music.music_id}}" onclick="changeVideo(this.id)">{{music.title}}</a>
-            {% endfor %}
-        </nav>
-    </aside>
-
-    <main id="main">
-        <div id="video-wrapper">
-            <img id="gif-background" onclick="start()" src="" alt="">
-            <div id="contain-video">
-                <div id="pointer-events">
-                    <div style="width: 100%; height: 100%">
-                        <iframe id="youtube-music" width="100%" height="100%" title="Youtube Music Video"
-                            src="https://www.youtube.com/embed/kgx4WGK0oNU?autoplay=0&mute=0&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1&playerapiid=ytplayer">
-                        </iframe>
-                    </div>
+<main id="main">
+    <div id="video-wrapper">
+        <img id="gif-background" onclick="start()" src="" alt="">
+        <div id="contain-video">
+            <div id="pointer-events">
+                <div style="width: 100%; height: 100%">
+                    <iframe id="youtube-music" width="100%" height="100%" title="Youtube Music Video"
+                        src="https://www.youtube.com/embed/kgx4WGK0oNU?autoplay=0&mute=0&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1&playerapiid=ytplayer">
+                    </iframe>
                 </div>
             </div>
-            <div id="container-list">
-                <a id="open-nav" onclick="openNav()"><i class="fa fa-bars"></i></a>
-            </div>
-            <div id="container-btn">
-                <div id="buttons-wrap">
-                    <a id="play-pause-video" title="play/pause" onclick="playPauseVideo()"><i
-                            class="fa fa-play"></i></a>
-                    <a id="random-video" title="random music" onclick="randomVideo()"><i class="fa fa-random"></i></a>
-                    <a id="back-video" title="prev music" onclick="prevMusic()"><i class="fa fa-step-backward"></i></a>
-                    <a id="front-video" title="next music" onclick="nextMusic()"><i class="fa fa-step-forward"></i></a>
-                    <a id="new-gif" title="new gif" onclick="newGif()"><i class="fa fa-heart"></i></a>
-                    <a id="original-video" title="original video" onclick="getOriginalVideo()"><i
-                            class="fa fa-star"></i></a>
-                    <div id="volume-wrap">
-                        <a id="front-video" title="volume"><i class="fa fa-volume-up"></i></a>
-                        <input id="volume" type="range" min="0" max="100" value="50" oninput="setVolume(this.value)">
-                    </div>
-                </div>
-
-                <div id="container-title">
-                    <div class="playing">
-                        <span class="playing-bar playing-bar1"></span>
-                        <span class="playing-bar playing-bar2"></span>
-                        <span class="playing-bar playing-bar3"></span>
-                    </div>
-                    <p id="video-title">Press any key to start...</p>
-                </div>
-            </div>
-
         </div>
-    </main>
-</body>
+        <div id="container-list">
+            <a id="open-nav" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        </div>
+        <div id="container-btn">
+            <div id="buttons-wrap">
+                <a id="play-pause-video" title="play/pause" onclick="playPauseVideo()"><i class="fa fa-play"></i></a>
+                <a id="random-video" title="random music" onclick="randomVideo()"><i class="fa fa-random"></i></a>
+                <a id="back-video" title="prev music" onclick="prevMusic()"><i class="fa fa-step-backward"></i></a>
+                <a id="front-video" title="next music" onclick="nextMusic()"><i class="fa fa-step-forward"></i></a>
+                <a id="new-gif" title="new gif" onclick="newGif()"><i class="fa fa-heart"></i></a>
+                <a id="original-video" title="original video" onclick="getOriginalVideo()"><i
+                        class="fa fa-star"></i></a>
+                <div id="volume-wrap">
+                    <a id="front-video" title="volume"><i class="fa fa-volume-up"></i></a>
+                    <input id="volume" type="range" min="0" max="100" value="50" oninput="setVolume(this.value)">
+                </div>
+            </div>
 
-</html>
+            <div id="container-title">
+                <div class="playing">
+                    <span class="playing-bar playing-bar1"></span>
+                    <span class="playing-bar playing-bar2"></span>
+                    <span class="playing-bar playing-bar3"></span>
+                </div>
+                <p id="video-title">Press any key to start...</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+{% endblock content %}

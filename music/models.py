@@ -1,6 +1,7 @@
 from pyexpat import model
 from django.db import models
 from django.utils.timezone import now
+from django.utils.text import slugify
 import requests
 
 
@@ -35,8 +36,12 @@ class PlaylistModel(models.Model):
     title = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     author = models.CharField(max_length=255)
-    musics = models.ManyToManyField(MusicModel)
+    musics = models.ManyToManyField(MusicModel, blank=True, null=True)
     created_at = models.DateField(default=now())
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(PlaylistModel, self).save(*args, **kwargs)

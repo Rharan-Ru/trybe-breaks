@@ -1,62 +1,47 @@
+{% extends 'navbar.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/playlist_style.css' %}">
+<script src="{% static 'js/playlist.js' %}"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/playlist_style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="{% static 'js/playlist.js' %}"></script>
-    <title>Try BBreaks</title>
-</head>
-
-<body>
-    <header id="header">
-        <h3>Try BBreaks</h3>
-    </header>
-    <main>
-        <aside id="perfil-container">
-            <div class="items-wrap">
-                <img id="avatar" src="https://i.pinimg.com/736x/0e/a2/1d/0ea21da59975004561ffde7fc95371ba.jpg"
-                    alt="minha nft braba">
+<header class="" id="header">
+    <h3 class="m-0 p-2">Try BBreaks</h3>
+</header>
+<main class="container-fluid row g-2">
+    <aside class="col-12 col-md-4 col-lg-3" id="perfil-container">
+        <div class="sticky-top" id="menu-wrapper">
+            <div class="">
+                <img class="img-fluid" id="avatar"
+                    src="https://files.sunoresearch.com.br/n/uploads/2022/01/twitter-nft-bored-ape-nova-post.jpg">
             </div>
-        </aside>
+            <div class="d-grid gap-2 mt-3" id="features">
+                <button type="button" class="btn btn-outline-secondary">New Playlist</button>
+                <button type="button" class="btn btn-outline-secondary">Frase do dia</button>
+                <button type="button" class="btn btn-outline-secondary">FeedBacks</button>
+            </div>
+        </div>
+    </aside>
 
-        <article id="playlists-container">
-            <div class="playlists-wrap">
-                {% for playlist in playlists %}
-                <div class="playlist">
-                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
-                        class="playlist-background" />
-                    <a href="musics/{{playlist.slug}}"><p>{{ playlist.title }}</p></a>
-                </div>
-                {% endfor %}
-                <div class="playlist">
-                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
-                        class="playlist-background" />
-                    <p>Lofi Playlist</p>
-                </div>
-                <div class="playlist">
-                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
-                        class="playlist-background" />
-                    <p>Lofi Playlist</p>
-                </div>
-                <div class="playlist">
-                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
-                        class="playlist-background" />
-                    <p>Lofi Playlist</p>
-                </div>
-                <div class="playlist">
-                    <img src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
-                        class="playlist-background" />
-                    <p>Lofi Playlist</p>
+    <article class="col-12 col-md-8 col-lg-9">
+        <div class="row g-2">
+            {% for playlist in playlists %}
+            <div class="col-6 col-md-4 col-lg-4">
+                <div class="card border-none" style="border: none;">
+                    <a href="musics/{{playlist.slug}}">
+                        <img class="card-img-top img-fluid playlist-thumb"
+                            src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
+                            class="playlist-background" />
+                    </a>
+                    <div class="card-body">
+                        <a href="musics/{{playlist.slug}}">
+                            <p class="">{{ playlist.title | truncatechars:30 }}</p>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </article>
-    </main>
-</body>
-
-</html>
+            {% endfor %}
+        </div>
+    </article>
+</main>
+{% endblock content %}
