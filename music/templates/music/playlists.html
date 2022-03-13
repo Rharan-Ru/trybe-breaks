@@ -3,20 +3,60 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/playlist_style.css' %}">
-<script src="{% static 'js/playlist.js' %}"></script>
 
 <header class="" id="header">
     <h3 class="m-0 p-2">Try BBreaks</h3>
 </header>
-<main class="container-fluid row g-2">
-    <aside class="col-12 col-md-4 col-lg-3" id="perfil-container">
+
+<main id="main" class="container-fluid row g-2 p-0 m-0" style="width: auto;">
+    <aside id="mySidenav" class="sidenav p-2">
+        <a id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
+        <nav id="form-wrapper">
+            <form id="playlist-form" class="mt-5">
+                <div class="mb-3">
+                    <label for="InputTitle" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="InputTitle" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="authorInput" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="authorInput" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="visibility-select" class="form-label">Playlist visibility</label>
+                    <select id="visibility-select" class="form-select" aria-label="Paylist visibility">
+                        <option value="1">Public</option>
+                        <option value="2">Private</option>
+                    </select>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input id="link-input" type="text" class="form-control" placeholder="add a link..."
+                        aria-label="Add a link" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-info" id="enter" type="button">Add</button>
+                    </div>
+
+                    <div class="col-12" id="links-container">
+                        <ul class="list-group">
+                        </ul>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </nav>
+    </aside>
+
+    <aside class="col-12 col-md-4 col-lg-3 p-2" id="perfil-container">
         <div class="sticky-top" id="menu-wrapper">
             <div class="">
                 <img class="img-fluid" id="avatar"
                     src="https://files.sunoresearch.com.br/n/uploads/2022/01/twitter-nft-bored-ape-nova-post.jpg">
             </div>
             <div class="d-grid gap-2 mt-3" id="features">
-                <button type="button" class="btn btn-outline-secondary">New Playlist</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="openPlaylistForm()">New
+                    Playlist</button>
                 <button type="button" class="btn btn-outline-secondary">Frase do dia</button>
                 <button type="button" class="btn btn-outline-secondary">FeedBacks</button>
             </div>
@@ -26,9 +66,9 @@
     <article class="col-12 col-md-8 col-lg-9">
         <div class="row g-2">
             {% for playlist in playlists %}
-            <div class="col-6 col-md-4 col-lg-4">
+            <div class="col-6 col-md-4 col-lg-4 card-playlist">
                 <div class="card border-none" style="border: none;">
-                    <a href="musics/{{playlist.slug}}">
+                    <a id="test" href="musics/{{playlist.slug}}">
                         <img class="card-img-top img-fluid playlist-thumb"
                             src="https://i.pinimg.com/originals/62/39/4d/62394d753859943e6a1a36443ef78795.gif"
                             class="playlist-background" />
@@ -44,4 +84,5 @@
         </div>
     </article>
 </main>
+<script src="{% static 'js/playlist.js' %}"></script>
 {% endblock content %}

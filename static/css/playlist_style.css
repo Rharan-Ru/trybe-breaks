@@ -11,6 +11,11 @@ body {
     color: white;
 }
 
+#perfil-container {
+    border: 1px solid #2bfd0f;
+    z-index: 1;
+}
+
 #avatar {
     object-fit: cover;
     object-position: center;
@@ -20,18 +25,23 @@ body {
 
 .card {
     background-color: transparent;
-    /* max-height: 200px; */
     height: auto;
 }
 
 .card:hover {
     opacity: 0.7;
-    transform: scale(0.98);
     transition: all ease .5s;
 }
 
 .playlist-thumb {
-    border: 1px solid white;
+    border: 1px solid #2bfd0f;
+    transition: all 1s ease;
+}
+
+.playlist-thumb:hover {
+    transition: 0s;
+    border: none;
+    box-shadow: 0 0 25px #2bfd0f;
 }
 
 .card-body a {
@@ -39,4 +49,86 @@ body {
     color: white;
     font-size: 10px;
     text-align: justify;
-} 
+}
+
+.card-body a:after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: center;
+    display: block;
+    background-color: #2bfd0f;
+    transition: all .6s ease;
+
+}
+
+.card-body a:hover:after {
+    transform: scaleX(1);
+    transform-origin: center;
+
+}
+
+#playlist-form {
+    cursor: auto;
+}
+
+.sidenav {
+    margin: 0;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    visibility: hidden;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+/* The navigation menu links */
+.sidenav a,
+nav {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    color: green;
+    display: block;
+    transition: all 1s ease;
+    cursor: pointer;
+    border-bottom: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidenav .activate {
+    background-color: rgb(32, 18, 160);
+}
+
+.sidenav a:hover {
+    transition: 0s;
+    color: #2bfd0f;
+    text-shadow: 0 0 12px #2bfd0f;
+}
+
+.sidenav #close-navbar {
+    position: absolute;
+    transition: 1s;
+    color: #2bfd0f;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#links-container {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    overflow-x: auto;
+}
