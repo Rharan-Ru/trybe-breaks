@@ -74,11 +74,11 @@ body {
 }
 
 .sidenav {
+    visibility: hidden;
     margin: 0;
     height: 100%;
     width: 0;
     position: fixed;
-    visibility: hidden;
     z-index: 2;
     top: 0;
     left: 0;
@@ -131,4 +131,9 @@ nav {
 
 .list-group-item {
     overflow-x: auto;
+}
+
+#playlist-pass {
+    opacity: 20%;
+    transition: all ease .5s;
 }

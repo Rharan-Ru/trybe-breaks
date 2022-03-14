@@ -12,34 +12,38 @@
     <aside id="mySidenav" class="sidenav p-2">
         <a id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
         <nav id="form-wrapper">
-            <form id="playlist-form" class="mt-5">
+            <form id="playlist-form" class="mt-5" method="post">
+                {% csrf_token %}
                 <div class="mb-3">
                     <label for="InputTitle" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="InputTitle" required>
+                    <input name="title" type="text" class="form-control" id="InputTitle" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="authorInput" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="authorInput" required>
+                    <input name="author" type="text" class="form-control" id="authorInput" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="visibility-select" class="form-label">Playlist visibility</label>
-                    <select id="visibility-select" class="form-select" aria-label="Paylist visibility">
+                    <select name="playlist-priv" id="visibility-select" class="form-select" aria-label="Paylist visibility"
+                        onchange="disableEnablePassInput()">
                         <option value="1">Public</option>
                         <option value="2">Private</option>
                     </select>
+                    <input type="text" class="form-control mt-3" disabled="true" id="playlist-pass" required="false"
+                        placeholder="Playlist Password">
                 </div>
 
                 <div class="input-group mb-3">
                     <input id="link-input" type="text" class="form-control" placeholder="add a link..."
-                        aria-label="Add a link" required>
+                        aria-label="Add a link">
                     <div class="input-group-append">
                         <button class="btn btn-outline-info" id="enter" type="button">Add</button>
                     </div>
 
                     <div class="col-12" id="links-container">
-                        <ul class="list-group">
+                        <ul name="music-links" class="list-group">
                         </ul>
                     </div>
                 </div>

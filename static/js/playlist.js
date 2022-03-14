@@ -4,7 +4,7 @@ function openPlaylistForm() {
     document.getElementById("close-navbar").style.opacity = '100%';
     mySide.style.width = "25%";
     mySide.style.visibility = "visible";
-    document.getElementById("main").style.marginRight = "300px";
+    document.getElementById("main").style.marginLeft = "300px";
 };
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
@@ -13,19 +13,44 @@ function closePlaylistForm() {
     document.getElementById("close-navbar").style.opacity = '0';
     mySide.style.width = "0";
     mySide.style.visibility = "hidden";
-    document.getElementById("main").style.marginRight = "0";
+    document.getElementById("main").style.marginLeft = "0";
 };
 
-var button = document.getElementById("enter");
-var input = document.getElementById("link-input");
-var ul = document.querySelector("ul");
+let button = document.getElementById("enter");
+let input = document.getElementById("link-input");
+let ul = document.querySelector("ul");
 
 button.addEventListener("click", function () {
     if (input.value !== '') {
         var li = document.createElement("li");
         li.className = 'list-group-item mt-1';
         li.textContent = input.value;
+
+        let inputWithValue = document.createElement("input");
+        inputWithValue.name = "links-list";
+        inputWithValue.value = input.value;
+        inputWithValue.type = 'hidden';
+
+        li.appendChild(inputWithValue);
         ul.appendChild(li);
         input.value = '';
     }
+    input.required = false;
 })
+
+function disableEnablePassInput() {
+    let passInput = document.getElementById("playlist-pass");
+    let selectPublicPrivate = document.getElementById("visibility-select");
+    console.log(selectPublicPrivate.value);
+    if (selectPublicPrivate.value == 1) {
+        console.log("sim");
+        passInput.disabled = true;
+        passInput.required = false;
+        passInput.style.opacity = '20%'
+        return;
+    }
+    passInput.disabled = false;
+    passInput.required = true;
+    passInput.style.opacity = '100%'
+    return;
+}
