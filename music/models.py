@@ -41,6 +41,8 @@ class PlaylistModel(models.Model):
     slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     author = models.CharField(max_length=255)
     musics = models.ManyToManyField(MusicModel, blank=True, null=True)
+    privacy = models.BooleanField(default=False)
+    password = models.CharField(max_length=30, blank=True, null=True)
     created_at = models.DateField(default=now())
 
     def __str__(self):

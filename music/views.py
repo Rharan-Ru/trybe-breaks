@@ -15,7 +15,7 @@ class MusicView(View):
 
 class PlayListView(View):
     def get(self, request):
-        playlists = PlaylistModel.objects.all()
+        playlists = PlaylistModel.objects.all().order_by('-created_at')
         context = {
             'playlists': playlists,
         }
@@ -26,14 +26,22 @@ class PlayListView(View):
         author = request.POST['author']
         privacy = request.POST['playlist-priv']
         links_list = request.POST.getlist('links-list')
-
         new_playlist = PlaylistModel.objects.create(
             title=title,
             author=author,
+            privacy=privacy
         )
         for link in links_list:
-            music = MusicModel.objects.create(video_url=link)
-            music.save()
-            new_playlist.musics.add(music)
+            if MusicModel.objects.filter(video_url=link).exists():
+                music = MusicModel.objects.get(video_url=link)
+                new_playlist.musics.add(music)
+            else:
+                music = MusicModel.objects.create(video_url=link)
+                music.save()
+                new_playlist.musics.add(music)
+
+        if request.POST['playlist-password']:
+            playlist_password = request.POST['playlist-password']
+            new_playlist.password = playlist_password
         new_playlist.save()
         return redirect('playlist-view')

@@ -42,7 +42,7 @@ function disableEnablePassInput() {
     let passInput = document.getElementById("playlist-pass");
     let selectPublicPrivate = document.getElementById("visibility-select");
     console.log(selectPublicPrivate.value);
-    if (selectPublicPrivate.value == 1) {
+    if (selectPublicPrivate.value == 0) {
         console.log("sim");
         passInput.disabled = true;
         passInput.required = false;
@@ -52,5 +52,19 @@ function disableEnablePassInput() {
     passInput.disabled = false;
     passInput.required = true;
     passInput.style.opacity = '100%'
+    return;
+}
+
+function seeHidePass() {
+    let passInput = document.getElementById("playlist-pass");
+    let passIcon = document.getElementById("pass-icon");
+
+    if (passInput.type === 'text') {
+        passInput.type = 'password';
+        passIcon.className = 'bi bi-eye-slash-fill'
+        return;
+    }
+    passInput.type = 'text';
+    passIcon.className = 'bi bi-eye-fill';
     return;
 }

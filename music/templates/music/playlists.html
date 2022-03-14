@@ -24,15 +24,22 @@
                     <input name="author" type="text" class="form-control" id="authorInput" required>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-1">
                     <label for="visibility-select" class="form-label">Playlist visibility</label>
-                    <select name="playlist-priv" id="visibility-select" class="form-select" aria-label="Paylist visibility"
-                        onchange="disableEnablePassInput()">
-                        <option value="1">Public</option>
-                        <option value="2">Private</option>
+                    <select name="playlist-priv" id="visibility-select" class="form-select"
+                        aria-label="Paylist visibility" onchange="disableEnablePassInput()">
+                        <option value="0">Public</option>
+                        <option value="1">Private</option>
                     </select>
-                    <input type="text" class="form-control mt-3" disabled="true" id="playlist-pass" required="false"
-                        placeholder="Playlist Password">
+
+                    <div id="pass-wrapper" class="mt-1">
+                        <input name="playlist-password" type="password" class="form-control" disabled="true"
+                            id="playlist-pass" required="false" placeholder="Playlist Password">
+                        <a onclick="seeHidePass()">
+                            <i id="pass-icon" class="bi bi-eye-slash-fill"></i>
+                        </a>
+                    </div>
+                    
                 </div>
 
                 <div class="input-group mb-3">

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
 body {
     margin: 0;
@@ -111,7 +112,7 @@ nav {
 .sidenav a:hover {
     transition: 0s;
     color: #2bfd0f;
-    text-shadow: 0 0 12px #2bfd0f;
+    text-shadow: 0 0 6px #2bfd0f;
 }
 
 .sidenav #close-navbar {
@@ -136,4 +137,15 @@ nav {
 #playlist-pass {
     opacity: 20%;
     transition: all ease .5s;
+}
+
+#pass-icon {
+    font-size: 2rem;
+    color: #2bfd0f;
+}
+
+#pass-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
