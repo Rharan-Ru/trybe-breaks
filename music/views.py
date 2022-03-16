@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import PlaylistModel, MusicModel
+from .forms import MyForm
 import requests
 
 
@@ -16,8 +17,10 @@ class MusicView(View):
 class PlayListView(View):
     def get(self, request):
         playlists = PlaylistModel.objects.all().order_by('-created_at')
+        form = MyForm
         context = {
             'playlists': playlists,
+            'form': form,
         }
         return render(request, 'music/playlists.html', context)
 
@@ -26,22 +29,35 @@ class PlayListView(View):
         author = request.POST['author']
         privacy = request.POST['playlist-priv']
         links_list = request.POST.getlist('links-list')
-        new_playlist = PlaylistModel.objects.create(
-            title=title,
-            author=author,
-            privacy=privacy
-        )
-        for link in links_list:
-            if MusicModel.objects.filter(video_url=link).exists():
-                music = MusicModel.objects.get(video_url=link)
-                new_playlist.musics.add(music)
-            else:
-                music = MusicModel.objects.create(video_url=link)
-                music.save()
-                new_playlist.musics.add(music)
+        image = request.FILES['image']
 
-        if request.POST['playlist-password']:
+        try:
+            new_playlist = PlaylistModel.objects.create(
+                title=title,
+                author=author,
+                privacy=privacy,
+                thumb=image
+            )
+        except Exception as error:
+            print("Este título já existe!")
+            print(error)
+
+        if privacy == 1:
             playlist_password = request.POST['playlist-password']
             new_playlist.password = playlist_password
+
+        if len(links_list) > 0:
+            for link in links_list:
+                if MusicModel.objects.filter(video_url=link).exists():
+                    music = MusicModel.objects.get(video_url=link)
+                    new_playlist.musics.add(music)
+                else:
+                    music = MusicModel.objects.create(video_url=link)
+                    try:
+                        music.save()
+                        new_playlist.musics.add(music)
+                    except Exception as error:
+                        print("Link inválido")
+                        print(error)
         new_playlist.save()
         return redirect('playlist-view')

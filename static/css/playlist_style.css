@@ -8,20 +8,44 @@ body {
     background-color: rgb(15, 15, 15);
 }
 
+/* all icons */
+.bi {
+    font-size: 1.8rem;
+    color: #2bfd0f;
+}
+
 #header {
     color: white;
 }
 
 #perfil-container {
-    border: 1px solid #2bfd0f;
     z-index: 1;
 }
 
-#avatar {
+#perfil-container #menu-wrapper {
+    border: 1px solid #2bfd0f;
+}
+
+#perfil-container #menu-wrapper #avatar {
     object-fit: cover;
     object-position: center;
     height: 40vh;
     border-radius: 15px;
+    width: 100%;
+}
+
+.playlist-thumb {
+    border: 1px solid #2bfd0f;
+    transition: all 1s ease;
+    min-height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.playlist-thumb:hover {
+    transition: 0s;
+    border: none;
+    box-shadow: 0 0 25px #2bfd0f;
 }
 
 .card {
@@ -34,22 +58,15 @@ body {
     transition: all ease .5s;
 }
 
-.playlist-thumb {
-    border: 1px solid #2bfd0f;
-    transition: all 1s ease;
-}
-
-.playlist-thumb:hover {
-    transition: 0s;
-    border: none;
-    box-shadow: 0 0 25px #2bfd0f;
-}
-
 .card-body a {
     text-decoration: none;
     color: white;
     font-size: 10px;
-    text-align: justify;
+    text-align: center;
+}
+
+.card-body a p {
+    margin: 0;
 }
 
 .card-body a:after {
@@ -70,9 +87,7 @@ body {
 
 }
 
-#playlist-form {
-    cursor: auto;
-}
+/* The SideNav form */
 
 .sidenav {
     visibility: hidden;
@@ -83,13 +98,12 @@ body {
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: black;
+    background-color: rgb(10, 10, 10);
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
 }
 
-/* The navigation menu links */
 .sidenav a,
 nav {
     padding: 8px;
@@ -125,27 +139,41 @@ nav {
     margin-left: 50px;
 }
 
-#links-container {
+/* sidenav form  */
+
+#playlist-form {
+    cursor: auto;
+}
+
+#playlist-form #links-container {
     max-height: 150px;
     overflow-y: auto;
 }
 
-.list-group-item {
+#playlist-form .list-group-item {
     overflow-x: auto;
 }
 
-#playlist-pass {
+#playlist-form #playlist-pass {
     opacity: 20%;
     transition: all ease .5s;
 }
 
-#pass-icon {
-    font-size: 2rem;
-    color: #2bfd0f;
-}
-
-#pass-wrapper {
+#playlist-form #pass-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.priv {
+    opacity: .7;
+}
+
+#test {
+    color: black;
+    position: absolute;
+    margin: auto;
+    top: 30%;
+    left: 46%;
+    font-size: 40px;
 }

@@ -2,9 +2,19 @@
 function openPlaylistForm() {
     let mySide = document.getElementById("mySidenav");
     document.getElementById("close-navbar").style.opacity = '100%';
-    mySide.style.width = "25%";
+    let w = window.innerWidth;
+    if (w > 990) {
+        mySide.style.width = "25%";
+        mySide.style.visibility = "visible";
+        return;
+    } else if (w < 767) {
+        mySide.style.width = "100%";
+        mySide.style.visibility = "visible";
+        return;
+    }
+    mySide.style.width = "33.33333333%";
     mySide.style.visibility = "visible";
-    document.getElementById("main").style.marginLeft = "300px";
+    return;
 };
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
@@ -68,3 +78,4 @@ function seeHidePass() {
     passIcon.className = 'bi bi-eye-fill';
     return;
 }
+
