@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.views import View
 from .models import PlaylistModel, MusicModel
 from .forms import MyForm
@@ -41,6 +42,7 @@ class PlayListView(View):
         except Exception as error:
             print("Este título já existe!")
             print(error)
+            return JsonResponse({"msg": "Este título já existe, por favor adicione outro."}, status=400)
 
         if privacy == 1:
             playlist_password = request.POST['playlist-password']
@@ -59,5 +61,6 @@ class PlayListView(View):
                     except Exception as error:
                         print("Link inválido")
                         print(error)
+                        return JsonResponse({"msg": "Link inválido, adicione apenas a url do video."}, status=400)
         new_playlist.save()
         return redirect('playlist-view')

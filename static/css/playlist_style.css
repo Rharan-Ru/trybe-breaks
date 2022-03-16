@@ -177,3 +177,9 @@ nav {
     left: 46%;
     font-size: 40px;
 }
+
+#form-errors {
+    white-space: pre-wrap;
+    color: red;
+    font-size: 11px;
+}

@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                 </div>
-                <p></p>
+                <p id="form-errors"></p>
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </nav>
@@ -146,10 +146,15 @@
                 // on successfull creating object
                 // 1. clear the form.
                 $("#playlist-form").trigger('reset');
-                console.log("tudo certo!")
+                console.log("tudo certo!");
+                console.log(response)
             },
             error: function (response) {
-                console.log("deu error")
+                console.log(response.responseJSON.msg);
+                let errorForm = response.responseJSON.msg;
+                let showErrors = document.getElementById("form-errors");
+                showErrors.innerText = errorForm;
+
             }
         })
     })
