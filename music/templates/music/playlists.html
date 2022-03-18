@@ -8,7 +8,7 @@
     <h3 class="m-0 p-2">Try BBreaks</h3>
 </header>
 
-<main id="main" class="container-fluid row g-2 p-0 m-0" style="width: auto;">
+<main id="main" class="container-fluid row g-2 p-0 m-0">
     <!-- Modal -->
     <div class="modal fade" id="pass-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <aside id="mySidenav" class="sidenav p-2">
-        <a id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
+        <a class="hover-green" id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
         <nav id="form-wrapper">
             <form id="playlist-form" class="mt-5" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -51,15 +51,16 @@
                     <div id="pass-wrapper" class="mt-1">
                         <input name="playlist-password" type="password" class="form-control" disabled="true"
                             id="playlist-pass" required="false" placeholder="Password">
-                        <a onclick="seeHidePass()">
+                        <a class="hover-green" onclick="seeHidePass()">
                             <i id="pass-icon" class="bi bi-eye-slash-fill"></i>
                         </a>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Playlist Thumb<i class="bi bi-camera-fill p-2"></i></label>
-                    <input name="image" class="form-control" type="file" accept="image/*" required="true" id="formFile">
-
+                    <label for="formFile" class="form-label">Playlist Thumb<i
+                            class="bi bi-camera-fill p-2 hover-green"></i></label>
+                    <input name=" image" class="form-control" type="file" accept="image/*" required="true"
+                        id="formFile">
                 </div>
                 <div class="input-group mb-3">
                     <label for="link-input" class="form-label col-12">Youtube Links</label>

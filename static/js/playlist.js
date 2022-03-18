@@ -26,27 +26,56 @@ function closePlaylistForm() {
     document.getElementById("main").style.marginLeft = "0";
 };
 
-let button = document.getElementById("enter");
-let input = document.getElementById("link-input");
-let ul = document.querySelector("ul");
+let buttonLink = document.getElementById("enter");
+let inputLink = document.getElementById("link-input");
+let ulLinks = document.querySelector("ul");
 
-button.addEventListener("click", function () {
-    if (input.value !== '') {
-        var li = document.createElement("li");
-        li.className = 'list-group-item mt-1';
-        li.textContent = input.value;
+function createLinksElements() {
+    let divWraper = document.createElement("div");
+    divWraper.id = 'links-wrapper';
 
-        let inputWithValue = document.createElement("input");
-        inputWithValue.name = "links-list";
-        inputWithValue.value = input.value;
-        inputWithValue.type = 'hidden';
+    let li = document.createElement("li");
+    li.className = 'list-group-item mt-1';
+    li.textContent = inputLink.value;
+    li.style.width = "100%"
 
-        li.appendChild(inputWithValue);
-        ul.appendChild(li);
-        input.value = '';
+    let inputWithValue = document.createElement("input");
+    inputWithValue.name = "links-list";
+    inputWithValue.value = inputLink.value;
+    inputWithValue.type = 'hidden';
+
+    let excludeBtn = document.createElement("a");
+    excludeBtn.className = 'exclude-link';
+    let excludeIcon = document.createElement("i");
+    excludeIcon.className = "fa fa-close hover-red";
+    excludeBtn.appendChild(excludeIcon);
+
+    li.appendChild(inputWithValue);
+    divWraper.appendChild(li);
+    divWraper.appendChild(excludeBtn);
+
+    ulLinks.appendChild(divWraper);
+}
+
+buttonLink.addEventListener("click", function () {
+    if (inputLink.value !== '') {
+        createLinksElements();
+        for (var i = 0; i < excludeLinks.length; i++) {
+            excludeLinks[i].addEventListener('click', deleteLink);
+        }
+        inputLink.value = '';
     }
-    input.required = false;
+    inputLink.required = false;
 })
+
+let excludeLinks = document.getElementsByClassName("exclude-link");
+
+function deleteLink(link) {
+    let target = link.target.parentElement;
+    let divWrapper = target.parentElement;
+    divWrapper.remove();
+    console.log(divWrapper);
+}
 
 function disableEnablePassInput() {
     let passInput = document.getElementById("playlist-pass");
@@ -78,4 +107,3 @@ function seeHidePass() {
     passIcon.className = 'bi bi-eye-fill';
     return;
 }
-

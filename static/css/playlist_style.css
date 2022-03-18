@@ -123,11 +123,29 @@ nav {
     background-color: rgb(32, 18, 160);
 }
 
-.sidenav a:hover {
+.sidenav .hover-green:hover {
     transition: 0s;
     color: #2bfd0f;
     text-shadow: 0 0 6px #2bfd0f;
 }
+
+.sidenav #links-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidenav .hover-red {
+    font-size: 30px;
+    transition: 1s;
+    color: #fd0f0f;
+}
+
+.sidenav .hover-red:hover {
+    transition: 0s;
+    text-shadow: 0 0 6px #fd0f0f;
+}
+
 
 .sidenav #close-navbar {
     position: absolute;
