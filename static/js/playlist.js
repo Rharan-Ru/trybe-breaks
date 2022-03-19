@@ -107,3 +107,14 @@ function seeHidePass() {
     passIcon.className = 'bi bi-eye-fill';
     return;
 }
+
+// add event listener to all playlists link to get slug
+let playlistSlugActive = '';
+let playlistsFocusSlug = document.getElementsByClassName("get-playlist-slug");
+
+function focusPlaylist(event) {
+    playlistSlugActive = event.srcElement.parentElement.id;
+}
+for (var i = 0; i < playlistsFocusSlug.length; i++) {
+    playlistsFocusSlug[i].addEventListener('click', focusPlaylist);
+}

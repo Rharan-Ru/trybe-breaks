@@ -17,17 +17,22 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <input name="playlist-password" type="password" class="form-control" id="playlist-pass"
-                        required="true" placeholder="Password">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Ok</button>
-                </div>
+                <form method="post" id="enter-playlist-form">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <input name="playlist-password-enter" type="password" class="form-control" id="playlist-pass-enter"
+                            required="true" placeholder="Password">
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-danger" id="enter-form-errors"></p>
+                        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary p-2">Ok</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
     <aside id="mySidenav" class="sidenav p-2">
         <a class="hover-green" id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
         <nav id="form-wrapper">
@@ -101,12 +106,14 @@
             <div class="col-6 col-md-4 col-lg-4 card-playlist">
                 <div class="card border-none" style="border: none;">
                     {% if playlist.privacy %}
-                    <a href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
+                    <a id="{{playlist.slug}}" class="get-playlist-slug" href="musics/{{playlist.slug}}"
+                        data-bs-toggle="modal" data-bs-target="#pass-modal">
                         <img class="card-img-top img-fluid playlist-thumb priv" src="{{ playlist.thumb.url }}" />
                         <i id="test" class="bi bi-lock-fill"></i>
                     </a>
                     <div class="card-body p-0 mt-3">
-                        <a href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <a id="{{playlist.slug}}" class="get-playlist-slug" href="musics/{{playlist.slug}}"
+                            data-bs-toggle="modal" data-bs-target="#pass-modal">
                             <p class="">{{ playlist.title | truncatechars:30 }}</p>
                         </a>
                     </div>
@@ -126,17 +133,15 @@
         </div>
     </article>
 </main>
+
 <script src="{% static 'js/playlist.js' %}"></script>
 
 {% block javascript %}
 <script>
     $("#playlist-form").submit(function (e) {
-        // preventing from page reload and default actions
         e.preventDefault();
-        // serialize the data for sending the form data.
         let data = new FormData($('#playlist-form').get(0));
-        console.log(data);
-        // make POST ajax call
+
         $.ajax({
             type: 'POST',
             url: "{% url 'playlist-view' %}",
@@ -144,18 +149,33 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                // on successfull creating object
-                // 1. clear the form.
                 $("#playlist-form").trigger('reset');
-                console.log("tudo certo!");
-                console.log(response)
             },
             error: function (response) {
-                console.log(response.responseJSON.msg);
                 let errorForm = response.responseJSON.msg;
                 let showErrors = document.getElementById("form-errors");
                 showErrors.innerText = errorForm;
+            }
+        })
+    })
 
+    $("#enter-playlist-form").submit(function (e) {
+        e.preventDefault();
+        let data = new FormData($('#enter-playlist-form').get(0));
+
+        $.ajax({
+            type: 'POST',
+            url: "pass/" + playlistSlugActive,
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                window.location = response.url
+            },
+            error: function (response) {
+                let errorForm = response.responseJSON.msg;
+                let showErrors = document.getElementById("enter-form-errors");
+                showErrors.innerText = errorForm;
             }
         })
     })

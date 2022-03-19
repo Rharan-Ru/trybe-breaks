@@ -1,14 +1,14 @@
 // Create Youtube embed player control - documentation reference: https://developers.google.com/youtube/iframe_api_reference
 
-var tag = document.createElement('script');
+let tag = document.createElement('script');
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
-var playerVolume = 50;
+let playerVolume = 50;
 
-var firstScriptTag = document.getElementsByTagName('script')[0];
+let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
+let player;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-music', {
@@ -27,12 +27,12 @@ function onPlayerReady(event) {
 }
 
 // Video buttons control
-var paused = true;
-var hasGif = true;
+let paused = true;
+let hasGif = true;
 
 // This function play and pause video by you state reference
 function playPauseVideo() {
-    var play = document.getElementById('play-pause-video');
+    let play = document.getElementById('play-pause-video');
     if (paused) {
         play.innerHTML = '<i class="fa fa-pause"></i>';
         player.playVideo();
@@ -57,9 +57,9 @@ function changeVideo(id) {
     currentMusic = document.getElementById(id);
     currentMusic.className = 'activate';
 
-    var ytVideoMusic = document.getElementById('youtube-music');
-    var videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
-    var newSrc;
+    let ytVideoMusic = document.getElementById('youtube-music');
+    let videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
+    let newSrc;
 
     try {
         if (!paused) {
@@ -76,7 +76,7 @@ function changeVideo(id) {
 
 // Get a random video-music
 function randomVideo() {
-    var randomMusic = musicIds[Math.floor((Math.random() * musicIds.length))];
+    let randomMusic = musicIds[Math.floor((Math.random() * musicIds.length))];
     changeVideo(randomMusic);
     newGif();
 };
@@ -97,13 +97,13 @@ function changeGif() {
     document.getElementById('gif-background').style = 'opacity: 0;';
 };
 
-// Change vars by ready function 
-var gifBack;
-var giphyURL;
-var newGif;
-var renderGif;
-var musicIds = [];
-var currentMusic;
+// Get random gifs
+let gifBack;
+let giphyURL;
+let newGif;
+let renderGif;
+let musicIds = [];
+let currentMusic;
 
 // Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
 $(document).ready(function () {
@@ -144,7 +144,7 @@ $(document).ready(function () {
     newGif();
 });
 
-var hasStarted = false;
+let hasStarted = false;
 if (hasStarted === false) {
     document.onkeydown = keyPressed;
     document.onclick = clickEvent;
@@ -165,21 +165,18 @@ if (hasStarted === false) {
 function start() {
     playPauseVideo();
     document.getElementById('video-title').innerHTML = player.getVideoData().title;
-
     document.onkeydown = keyPressed;
-
     function keyPressed(k) {
         console.log(k);
-        var pause = 80;
-        var random = 82;
-        var next = 68;
-        var prev = 65;
-        var gif = 71;
-        var nextGif = 78;
-        var random = 82;
+        let pause = 80;
+        let next = 68;
+        let prev = 65;
+        let gif = 71;
+        let nextGif = 78;
+        let random = 82;
 
-        var volRight = 39;
-        var volLeft = 37;
+        let volRight = 39;
+        let volLeft = 37;
         switch (k.keyCode) {
             case pause:
                 playPauseVideo();
@@ -215,7 +212,7 @@ function start() {
 };
 
 
-/* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+// Functions to open and close navbar
 function openNav() {
     document.getElementById("open-nav").style.opacity = '0';
     document.getElementById("close-navbar").style.opacity = '100%';
@@ -223,7 +220,6 @@ function openNav() {
     document.getElementById("main").style.marginLeft = "300px";
 };
 
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
     document.getElementById("open-nav").style.opacity = '100%';
     document.getElementById("close-navbar").style.opacity = '0';
@@ -231,6 +227,8 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 };
 
+
+// Functions to go to next music video or previous music video
 function nextMusic() {
     currentMusic.className = '';
     currentMusic = currentMusic.nextElementSibling;

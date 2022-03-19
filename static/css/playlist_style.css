@@ -37,7 +37,7 @@ body {
 .playlist-thumb {
     border: 1px solid #2bfd0f;
     transition: all 1s ease;
-    min-height: 200px;
+    height: 200px;
     object-fit: cover;
     object-position: center;
 }
