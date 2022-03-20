@@ -1,17 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
+:root {
+    --special-green: #2bfd0f;
+    --bg-color: rgb(15, 15, 15);
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: rgb(15, 15, 15);
+    background-color: var(--bg-color);
 }
 
 /* all icons */
 .bi {
     font-size: 1.8rem;
-    color: #2bfd0f;
+    color: var(--special-green);
 }
 
 #header {
@@ -23,7 +28,7 @@ body {
 }
 
 #perfil-container #menu-wrapper {
-    border: 1px solid #2bfd0f;
+    border: 1px solid var(--special-green);
 }
 
 #perfil-container #menu-wrapper #avatar {
@@ -35,9 +40,9 @@ body {
 }
 
 .playlist-thumb {
-    border: 1px solid #2bfd0f;
+    border: 1px solid var(--special-green);
     transition: all 1s ease;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
     object-position: center;
 }
@@ -45,7 +50,6 @@ body {
 .playlist-thumb:hover {
     transition: 0s;
     border: none;
-    box-shadow: 0 0 25px #2bfd0f;
 }
 
 .card {
@@ -76,7 +80,7 @@ body {
     transform: scaleX(0);
     transform-origin: center;
     display: block;
-    background-color: #2bfd0f;
+    background-color: var(--special-green);
     transition: all .6s ease;
 
 }
@@ -84,7 +88,10 @@ body {
 .card-body a:hover:after {
     transform: scaleX(1);
     transform-origin: center;
+}
 
+.card-playlist {
+    width: 185px;
 }
 
 /* The SideNav form */
@@ -98,7 +105,7 @@ body {
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: rgb(10, 10, 10);
+    background-color: var(--bg-color);
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -125,8 +132,8 @@ nav {
 
 .sidenav .hover-green:hover {
     transition: 0s;
-    color: #2bfd0f;
-    text-shadow: 0 0 6px #2bfd0f;
+    color: var(--special-green);
+    text-shadow: 0 0 6px var(--special-green);
 }
 
 .sidenav #links-wrapper {
@@ -150,7 +157,7 @@ nav {
 .sidenav #close-navbar {
     position: absolute;
     transition: 1s;
-    color: #2bfd0f;
+    color: var(--special-green);
     top: 0;
     right: 25px;
     font-size: 36px;
@@ -200,4 +207,18 @@ nav {
     white-space: pre-wrap;
     color: red;
     font-size: 11px;
+}
+
+.playlists-container {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 210px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.playlists-container::-webkit-scrollbar {
+    display: none;
 }

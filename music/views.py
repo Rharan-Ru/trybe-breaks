@@ -35,7 +35,7 @@ class PlayListView(View):
         image = request.FILES['image']
 
         try:
-            new_playlist = PlaylistModel.objects.create(
+            new_playlist = PlaylistModel(
                 title=title,
                 author=author,
                 privacy=privacy,
@@ -49,16 +49,17 @@ class PlayListView(View):
             new_playlist.password = playlist_password
 
         if len(links_list) > 0:
+            new_playlist.save()
             for link in links_list:
                 if MusicModel.objects.filter(video_url=link).exists():
                     music = MusicModel.objects.get(video_url=link)
                     new_playlist.musics.add(music)
                 else:
-                    music = MusicModel.objects.create(video_url=link)
                     try:
-                        music.save()
+                        music = MusicModel.objects.create(video_url=link)
                         new_playlist.musics.add(music)
                     except Exception as error:
+                        new_playlist.delete()
                         return JsonResponse({"msg": "Link inválido, adicione apenas a url do video."}, status=400)
         new_playlist.save()
         return redirect('playlist-view')

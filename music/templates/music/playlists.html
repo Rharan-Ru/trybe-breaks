@@ -4,7 +4,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/playlist_style.css' %}">
 
-<header class="" id="header">
+<header id="header">
     <h3 class="m-0 p-2">Try BBreaks</h3>
 </header>
 
@@ -12,19 +12,21 @@
     <!-- Modal -->
     <div class="modal fade" id="pass-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-dark">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Password</h5>
+                    <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <form method="post" id="enter-playlist-form">
-                    <div class="modal-body">
+                    <div class="modal-body p-1">
                         {% csrf_token %}
-                        <input name="playlist-password-enter" type="password" class="form-control" id="playlist-pass-enter"
-                            required="true" placeholder="Password">
+                        <input name="playlist-password-enter" type="password" class="form-control"
+                            id="playlist-pass-enter" required="true" placeholder="Password">
+                        <p class="text-danger text-center m-0 p-2" id="enter-form-errors"></p>
+
                     </div>
                     <div class="modal-footer">
-                        <p class="text-danger" id="enter-form-errors"></p>
                         <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary p-2">Ok</button>
                     </div>
@@ -70,7 +72,7 @@
                 <div class="input-group mb-3">
                     <label for="link-input" class="form-label col-12">Youtube Links</label>
                     <input id="link-input" type="text" class="form-control" placeholder="add a link..."
-                        aria-label="Add a link">
+                        aria-label="Add a link" required="true">
                     <div class="input-group-append">
                         <button class="btn btn-outline-info" id="enter" type="button">Add</button>
                     </div>
@@ -101,9 +103,9 @@
     </aside>
 
     <article class="col-12 col-md-8 col-lg-9">
-        <div class="row g-2">
+        <div class="playlists-container row gx-2">
             {% for playlist in playlists %}
-            <div class="col-6 col-md-4 col-lg-4 card-playlist">
+            <div class="col-6 col-md-4 col-lg-4 card-playlist mb-3">
                 <div class="card border-none" style="border: none;">
                     {% if playlist.privacy %}
                     <a id="{{playlist.slug}}" class="get-playlist-slug" href="musics/{{playlist.slug}}"
@@ -114,7 +116,7 @@
                     <div class="card-body p-0 mt-3">
                         <a id="{{playlist.slug}}" class="get-playlist-slug" href="musics/{{playlist.slug}}"
                             data-bs-toggle="modal" data-bs-target="#pass-modal">
-                            <p class="">{{ playlist.title | truncatechars:30 }}</p>
+                            <p class="">{{ playlist.title | truncatechars:25 }}</p>
                         </a>
                     </div>
                     {% else %}
@@ -123,7 +125,7 @@
                     </a>
                     <div class="card-body p-0 mt-3">
                         <a href="musics/{{playlist.slug}}">
-                            <p class="">{{ playlist.title | truncatechars:30 }}</p>
+                            <p class="">{{ playlist.title | truncatechars:25 }}</p>
                         </a>
                     </div>
                     {% endif %}
@@ -134,9 +136,9 @@
     </article>
 </main>
 
-<script src="{% static 'js/playlist.js' %}"></script>
-
+<!-- Ajax functions to post data without refresh page -->
 {% block javascript %}
+<script src="{% static 'js/playlist.js' %}"></script>
 <script>
     $("#playlist-form").submit(function (e) {
         e.preventDefault();

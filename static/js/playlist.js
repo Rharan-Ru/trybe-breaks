@@ -118,3 +118,13 @@ function focusPlaylist(event) {
 for (var i = 0; i < playlistsFocusSlug.length; i++) {
     playlistsFocusSlug[i].addEventListener('click', focusPlaylist);
 }
+
+// Function to scroll playlists vertically
+const scrollContainers = document.getElementsByClassName("playlists-container");
+
+document.querySelectorAll('.playlists-container').forEach(item => {
+    item.addEventListener('wheel', evt => {
+        evt.preventDefault();
+        item.scrollLeft += evt.deltaY;
+    })
+})
