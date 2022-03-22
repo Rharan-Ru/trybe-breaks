@@ -128,3 +128,21 @@ document.querySelectorAll('.playlists-container').forEach(item => {
         item.scrollLeft += evt.deltaY;
     })
 })
+
+document.querySelectorAll('.like-me').forEach(item => {
+    item.addEventListener('click', evt => {
+        evt.preventDefault();
+        if (evt.target.className.includes('bi-heart-fill')) {
+            evt.target.className = 'heart bi bi-heart p-2';
+            return
+        }
+        evt.target.className = 'heart bi bi-heart-fill p-2';
+    })
+})
+
+function saveLikesData(data) {
+    let likes = [];
+    likes = JSON.parse(localStorage.getItem('likes'));
+    likes.push(data);
+    localStorage.setItem('likes', JSON.stringify(likes))
+}

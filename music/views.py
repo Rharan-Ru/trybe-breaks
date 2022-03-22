@@ -6,7 +6,7 @@ from .forms import MyForm
 import requests
 
 
-class MusicView(View):
+class MusicsView(View):
     def get(self, request, slug):
         print(request.session[slug])
         if request.session[slug]:
@@ -72,5 +72,5 @@ def playlist_password(request, slug):
         playlist_password_input = request.POST['playlist-password-enter']
         if playlist.password == playlist_password_input:
             request.session[slug] = True
-            return JsonResponse({"msg": "Senha válida.", "url": f'/musics/{slug}'}, status=200)
+            return JsonResponse({"url": f'/musics/{slug}'}, status=200)
         return JsonResponse({"msg": "Senha inválida."}, status=400)

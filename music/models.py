@@ -45,6 +45,8 @@ class PlaylistModel(models.Model):
     password = models.CharField(max_length=30, blank=True, null=True)
     thumb = models.ImageField(upload_to='thumb/', blank=True)
     created_at = models.DateField(default=now())
+    views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

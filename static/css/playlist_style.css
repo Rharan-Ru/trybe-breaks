@@ -41,6 +41,7 @@ body {
 
 .playlist-thumb {
     border: 1px solid var(--special-green);
+    border-radius: 5px;
     transition: all 1s ease;
     height: 150px;
     object-fit: cover;
@@ -57,19 +58,25 @@ body {
     height: auto;
 }
 
-.card:hover {
+.card:hover .playlist-thumb {
     opacity: 0.7;
     transition: all ease .5s;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
 }
 
 .card-body a {
     text-decoration: none;
     color: white;
-    font-size: 10px;
+    font-size: 9.5px;
     text-align: center;
+    width: 100%;
 }
 
-.card-body a p {
+.card-body p {
     margin: 0;
 }
 
@@ -194,12 +201,11 @@ nav {
     opacity: .7;
 }
 
-#test {
+.priv-icon {
     color: black;
     position: absolute;
-    margin: auto;
-    top: 30%;
-    left: 46%;
+    top: 20%;
+    left: 40%;
     font-size: 40px;
 }
 
@@ -214,11 +220,28 @@ nav {
     flex-direction: column;
     overflow-x: auto;
     overflow-y: hidden;
-    height: 210px;
+    height: 260px;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
 .playlists-container::-webkit-scrollbar {
     display: none;
+}
+
+.playlist-items-container {
+    background-color: rgb(35, 30, 30);
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.like-me .heart {
+    color: #fd0f0f;
+    font-size: 25px;
+    margin-right: 5px;
+}
+
+.like-me .heart:hover {
+    color: var(--special-green);
+    transition: all ease .7s;
 }
