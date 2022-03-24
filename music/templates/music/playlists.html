@@ -105,14 +105,14 @@
     <article class="col-12 col-md-8 col-lg-9">
         <div class="playlists-container row gx-2">
             {% for playlist in playlists %}
-            <div class="col-6 col-md-4 col-lg-4 card-playlist mb-3">
-                <div class="card border-none" style="border: none;">
+            <div class="col-6 col-md-4 col-lg-2 card-playlist mb-3">
+                <div class="card" style="border: none;">
                     {% if playlist.privacy %}
                     <div class="playlist-items-container">
                         <a class="like-me" href="">
-                            <i class="heart bi bi-heart p-2"></i>
+                            <i class="heart bi bi-heart me-2 ms-2"></i>
+                            <span class="likes-counter">{{playlist.likes}}</span>
                         </a>
-                        <span>{{playlist.likes}}</span>
                     </div>
                     <a id="{{playlist.slug}}" class="get-playlist-slug" href="musics/{{playlist.slug}}"
                         data-bs-toggle="modal" data-bs-target="#pass-modal">
@@ -128,10 +128,11 @@
                     {% else %}
                     <div class="playlist-items-container">
                         <a class="like-me" href="">
-                            <i class="heart bi bi-heart p-2"></i>
+                            <i class="heart bi bi-heart me-2 ms-2"></i>
+                            <span class="likes-counter">{{playlist.likes}}</span>
                         </a>
                     </div>
-                    <a href="musics/{{playlist.slug}}">
+                    <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                         <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />
                     </a>
                     <div class="card-body p-0 mt-3">
@@ -175,7 +176,7 @@
     $("#enter-playlist-form").submit(function (e) {
         e.preventDefault();
         let data = new FormData($('#enter-playlist-form').get(0));
-
+        console.log($('#enter-playlist-form').get(0));
         $.ajax({
             type: 'POST',
             url: "pass/" + playlistSlugActive,

@@ -4,19 +4,25 @@ from django.views import View
 from .models import PlaylistModel, MusicModel
 from .forms import MyForm
 import requests
+from django.views.decorators.csrf import csrf_exempt
 
 
 class MusicsView(View):
     def get(self, request, slug):
-        print(request.session[slug])
-        if request.session[slug]:
-            request.session[slug] = ''
+        try:
+            if request.session['slug'] == slug:
+                request.session[slug] = ''
+                playlist = PlaylistModel.objects.get(slug=slug)
+                context = {
+                    'playlist': playlist,
+                }
+                return render(request, 'music/index.html', context)
+        except:
             playlist = PlaylistModel.objects.get(slug=slug)
             context = {
                 'playlist': playlist,
             }
             return render(request, 'music/index.html', context)
-        return redirect('playlist-view')
 
 
 class PlayListView(View):
@@ -65,12 +71,33 @@ class PlayListView(View):
         return redirect('playlist-view')
 
 
+@csrf_exempt
 def playlist_password(request, slug):
     if request.method == "POST":
-        print(slug)
+        print(request.POST)
         playlist = PlaylistModel.objects.get(slug=slug)
         playlist_password_input = request.POST['playlist-password-enter']
         if playlist.password == playlist_password_input:
             request.session[slug] = True
             return JsonResponse({"url": f'/musics/{slug}'}, status=200)
         return JsonResponse({"msg": "Senha inválida."}, status=400)
+
+
+@csrf_exempt
+def like_view(request, slug):
+    if request.method == "POST":
+        print(slug)
+        playlist = PlaylistModel.objects.get(slug=slug)
+        playlist.likes += 1
+        playlist.save()
+        return JsonResponse({"msg": "Liked"}, status=200)
+
+
+@csrf_exempt
+def dislike_view(request, slug):
+    if request.method == "POST":
+        print(slug)
+        playlist = PlaylistModel.objects.get(slug=slug)
+        playlist.likes -= 1
+        playlist.save()
+        return JsonResponse({"msg": "Disliked"}, status=200)

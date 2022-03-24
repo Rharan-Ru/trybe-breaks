@@ -40,7 +40,7 @@ body {
 }
 
 .playlist-thumb {
-    border: 1px solid var(--special-green);
+    border: 2px solid var(--special-green);
     border-radius: 5px;
     transition: all 1s ease;
     height: 150px;
@@ -50,7 +50,7 @@ body {
 
 .playlist-thumb:hover {
     transition: 0s;
-    border: none;
+    border: transparent;
 }
 
 .card {
@@ -217,7 +217,7 @@ nav {
 
 .playlists-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
     height: 260px;
@@ -233,15 +233,30 @@ nav {
     background-color: rgb(35, 30, 30);
     border-radius: 5px;
     margin-bottom: 8px;
+    display: flex;
+}
+
+.like-me {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 33px;
+    white-space: normal;
 }
 
 .like-me .heart {
     color: #fd0f0f;
     font-size: 25px;
-    margin-right: 5px;
+    margin-right: 2px;
 }
 
 .like-me .heart:hover {
     color: var(--special-green);
     transition: all ease .7s;
+}
+
+.likes-counter {
+    margin: 0;
+    display: inline;
+    color: white;
 }
