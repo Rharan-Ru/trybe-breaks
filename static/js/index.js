@@ -14,6 +14,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-music', {
         events: {
             'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
     });
 }
@@ -24,6 +25,12 @@ function onPlayerReady(event) {
         document.getElementById('video-title').innerHTML = player.getVideoData().title;
     }
     return;
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === 0) {
+        nextMusic();
+    }
 }
 
 // Video buttons control
@@ -166,6 +173,7 @@ function start() {
     playPauseVideo();
     document.getElementById('video-title').innerHTML = player.getVideoData().title;
     document.onkeydown = keyPressed;
+
     function keyPressed(k) {
         console.log(k);
         let pause = 80;

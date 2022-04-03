@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 class MusicsView(View):
     def get(self, request, slug):
         playlist = PlaylistModel.objects.get(slug=slug)
+        first_music = playlist.musics.all()[0].music_id
+        print(first_music)
         playlist.views += 1
         playlist.save()
         try:
@@ -17,11 +19,13 @@ class MusicsView(View):
                 request.session[slug] = ''
                 context = {
                     'playlist': playlist,
+                    'first_music': first_music,
                 }
                 return render(request, 'music/index.html', context)
         except:
             context = {
                 'playlist': playlist,
+                'first_music': first_music,
             }
             return render(request, 'music/index.html', context)
 
