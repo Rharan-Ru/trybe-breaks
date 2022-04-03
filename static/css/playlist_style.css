@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
     --special-green: #2bfd0f;
-    --bg-color: rgb(15, 15, 15);
+    --bg-color: rgb(20, 20, 20);
 }
 
 body {
-    margin: 0;
-    padding: 0;
     font-family: 'Press Start 2P', cursive;
     background-color: var(--bg-color);
 }
@@ -21,20 +25,19 @@ body {
 
 #header {
     color: white;
+    background-color: rgb(10, 10, 10);
+    margin-bottom: 25px;
 }
 
 #perfil-container {
     z-index: 1;
 }
 
-#perfil-container #menu-wrapper {
-    border: 1px solid var(--special-green);
-}
-
 #perfil-container #menu-wrapper #avatar {
     object-fit: cover;
     object-position: center;
-    height: 40vh;
+    min-height: 350px;
+    max-height: 400px;
     border-radius: 15px;
     width: 100%;
 }
@@ -97,11 +100,19 @@ body {
     transform-origin: center;
 }
 
-.card-playlist {
-    width: 185px;
+/* The SideNav form */
+
+.navbar-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* The SideNav form */
+.navbar-logo-container p {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+}
 
 .sidenav {
     visibility: hidden;
@@ -112,7 +123,7 @@ body {
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: var(--bg-color);
+    background-color: rgb(3, 3, 3);
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -162,13 +173,12 @@ nav {
 
 
 .sidenav #close-navbar {
-    position: absolute;
     transition: 1s;
     color: var(--special-green);
-    top: 0;
-    right: 25px;
     font-size: 36px;
-    margin-left: 50px;
+    display: flex;
+    padding: 0;
+    margin: 0;
 }
 
 /* sidenav form  */
@@ -197,15 +207,15 @@ nav {
     align-items: center;
 }
 
-.priv {
-    opacity: .7;
+.playlist-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .priv-icon {
-    color: black;
+    color: var(--special-green);
     position: absolute;
-    top: 20%;
-    left: 40%;
     font-size: 40px;
 }
 
@@ -259,4 +269,18 @@ nav {
     margin: 0;
     display: inline;
     color: white;
+}
+
+@media screen and (max-width: 360px) {
+    .card-playlist {
+        width: 160px;
+    }
+
+    .article {
+        margin-top: 50px;
+    }
+
+    article h5 {
+        font-size: 15px;
+    }
 }

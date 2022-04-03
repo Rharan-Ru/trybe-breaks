@@ -8,6 +8,7 @@ function openPlaylistForm() {
         mySide.style.visibility = "visible";
         return;
     } else if (w < 767) {
+        // Function to scroll playlists vertically
         mySide.style.width = "100%";
         mySide.style.visibility = "visible";
         return;
@@ -116,16 +117,6 @@ for (var i = 0; i < playlistsFocusSlug.length; i++) {
     playlistsFocusSlug[i].addEventListener('click', focusPlaylist);
 }
 
-// Function to scroll playlists vertically
-const scrollContainers = document.getElementsByClassName("playlists-container");
-
-document.querySelectorAll('.playlists-container').forEach(item => {
-    item.addEventListener('wheel', evt => {
-        evt.preventDefault();
-        item.scrollLeft += evt.deltaY;
-    })
-})
-
 document.querySelectorAll('.like-me').forEach(item => {
     item.addEventListener('click', evt => {
         evt.preventDefault();
@@ -160,9 +151,9 @@ function saveLikesData(data) {
     return;
 }
 
-function arrayRemove(arr, value) { 
-    return arr.filter(function(ele){ 
-        return ele != value; 
+function arrayRemove(arr, value) {
+    return arr.filter(function (ele) {
+        return ele != value;
     });
 }
 
@@ -191,10 +182,8 @@ function likePost(slug) {
         url: "like/" + slug,
         processData: false,
         contentType: false,
-        success: function (response) {
-        },
-        error: function (response) {
-        }
+        success: function (response) {},
+        error: function (response) {}
     })
 }
 
@@ -204,9 +193,9 @@ function dislikePost(slug) {
         url: "dislike/" + slug,
         processData: false,
         contentType: false,
-        success: function (response) {
-        },
-        error: function (response) {
-        }
+        success: function (response) {},
+        error: function (response) {}
     })
 }
+
+{/* <script src="https://kit.fontawesome.com/016c7a8b8c.js" crossorigin="anonymous"></script>  */}

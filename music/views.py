@@ -3,33 +3,57 @@ from django.http import JsonResponse
 from django.views import View
 from .models import PlaylistModel, MusicModel
 from .forms import MyForm
-import requests
+import random
 from django.views.decorators.csrf import csrf_exempt
 
 
 class MusicsView(View):
     def get(self, request, slug):
+        playlist = PlaylistModel.objects.get(slug=slug)
+        playlist.views += 1
+        playlist.save()
         try:
             if request.session['slug'] == slug:
                 request.session[slug] = ''
-                playlist = PlaylistModel.objects.get(slug=slug)
                 context = {
                     'playlist': playlist,
                 }
                 return render(request, 'music/index.html', context)
         except:
-            playlist = PlaylistModel.objects.get(slug=slug)
             context = {
                 'playlist': playlist,
             }
             return render(request, 'music/index.html', context)
 
 
+def remove_duplicates(list1, list2):
+    new_list = []
+    for play in list1:
+        new_list.append(play)
+    for play in list2:
+        if play in new_list:
+            new_list.remove(play)
+        else:
+            new_list.append(play)
+    return new_list
+
+
 class PlayListView(View):
     def get(self, request):
-        playlists = PlaylistModel.objects.all().order_by('-created_at')
+        playlists = PlaylistModel.objects.all()
+        lasts_playlists = playlists.order_by('-created_at')[0:6]
+
+        most_view = playlists.order_by('-views').reverse()
+        most_view = remove_duplicates(lasts_playlists, most_view)[0:6]
+
+        random_playlists = playlists.order_by('?')
+        random_playlists = remove_duplicates(lasts_playlists, random_playlists)
+        random_playlists = remove_duplicates(most_view, random_playlists)
+
         context = {
-            'playlists': playlists,
+            'playlists': lasts_playlists,
+            'most_views': most_view,
+            'random_playlists': random_playlists,
         }
         return render(request, 'music/playlists.html', context)
 
