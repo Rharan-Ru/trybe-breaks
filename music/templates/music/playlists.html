@@ -4,15 +4,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/playlist_style.css' %}">
 
-<header id="header">
-    <h3 class="m-0 p-2">Try BBreaks</h3>
-</header>
-
-<main id="main" class="container-fluid row g-2 p-2 m-0">
+<main id="main" class="container-fluid row m-0 p-0">
     <!-- Modal -->
     <div class="modal fade" id="pass-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content bg-dark">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-white" id="exampleModalLabel">Password</h5>
                     <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
@@ -35,77 +31,26 @@
         </div>
     </div>
 
-    <aside id="mySidenav" class="sidenav p-2">
-        <div class="navbar-logo-container">
-            <p>Try BBreaks</p>
-            <a class="hover-green" id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
-        </div>
-        <nav id="form-wrapper">
-            <form id="playlist-form" class="mt-5" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="InputTitle" class="form-label">Title</label>
-                    <input name="title" type="text" class="form-control" id="InputTitle" required>
-                </div>
-                <div class="mb-3">
-                    <label for="authorInput" class="form-label">Author</label>
-                    <input name="author" type="text" class="form-control" id="authorInput" required>
-                </div>
-                <div class="mb-1">
-                    <label for="visibility-select" class="form-label">Playlist visibility</label>
-                    <select name="playlist-priv" id="visibility-select" class="form-select"
-                        aria-label="Paylist visibility" onchange="disableEnablePassInput()">
-                        <option value="0">Public</option>
-                        <option value="1">Private</option>
-                    </select>
-                    <div id="pass-wrapper" class="mt-1">
-                        <input name="playlist-password" type="password" class="form-control" disabled="true"
-                            id="playlist-pass" required="false" placeholder="Password">
-                        <a class="hover-green" onclick="seeHidePass()">
-                            <i id="pass-icon" class="bi bi-eye-slash-fill"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Playlist Thumb<i
-                            class="bi bi-camera-fill p-2 hover-green"></i></label>
-                    <input name=" image" class="form-control" type="file" accept="image/*" required="true"
-                        id="formFile">
-                </div>
-                <div class="input-group mb-3">
-                    <label for="link-input" class="form-label col-12">Youtube Links</label>
-                    <input id="link-input" type="text" class="form-control" placeholder="add a link..."
-                        aria-label="Add a link" required="true">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-info" id="enter" type="button">Add</button>
-                    </div>
-                    <div class="col-12" id="links-container">
-                        <ul name="music-links" class="list-group">
-                        </ul>
-                    </div>
-                </div>
-                <p id="form-errors"></p>
-                <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-        </nav>
-    </aside>
-
-    <aside class="col-12 col-md-4 col-lg-3" id="perfil-container">
+    <aside class="col-12 col-md-5 col-lg-3" id="perfil-container">
         <div class="sticky-top" id="menu-wrapper">
             <div class="" style="width: 100%;">
                 <img class="img-fluid" id="avatar"
                     src="https://files.sunoresearch.com.br/n/uploads/2022/01/twitter-nft-bored-ape-nova-post.jpg">
             </div>
-            <div class="d-grid gap-2 mt-3" id="features">
-                <button type="button" class="btn btn-outline-secondary" onclick="openPlaylistForm()">New
+            <div class="d-grid gap-2" id="features">
+                <button type="button" class="btn" onclick="openPlaylistForm()">New
                     Playlist</button>
-                <button type="button" class="btn btn-outline-secondary">Frase do dia</button>
-                <button type="button" class="btn btn-outline-secondary">FeedBacks</button>
+                <button type="button" class="btn">Frase do dia</button>
+                <button type="button" class="btn">FeedBacks</button>
             </div>
         </div>
     </aside>
 
-    <article class="col-12 col-md-8 col-lg-9 article">
+    <article class="col-12 col-md-7 col-lg-9 article">
+        <header class="sticky-top" id="header">
+            <h3 class="m-0 p-2">Try BBreaks</h3>
+            <button class="btn text-white random-playlist"><i class="fa fa-random"></i></button>
+        </header>
         <h5 class="text-white">Lasts Playlists Add</h2>
             <div class="playlists-container row gx-2">
                 {% for playlist in playlists %}
@@ -194,7 +139,7 @@
                 {% endfor %}
             </div>
 
-        <h5 class="text-white">Random Playlists</h5>
+            <h5 class="text-white">Random Playlists</h5>
             <div class="playlists-container row gx-2">
                 {% for playlist in random_playlists %}
                 <div class="col-6 col-md-4 col-lg-2 card-playlist mb-3">
@@ -244,28 +189,6 @@
 {% block javascript %}
 <script src="{% static 'js/playlist.js' %}"></script>
 <script>
-    $("#playlist-form").submit(function (e) {
-        e.preventDefault();
-        let data = new FormData($('#playlist-form').get(0));
-
-        $.ajax({
-            type: 'POST',
-            url: "{% url 'playlist-view' %}",
-            data: data,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                $("#playlist-form").trigger('reset');
-                window.location = '';
-            },
-            error: function (response) {
-                let errorForm = response.responseJSON.msg;
-                let showErrors = document.getElementById("form-errors");
-                showErrors.innerText = errorForm;
-            }
-        })
-    })
-
     $("#enter-playlist-form").submit(function (e) {
         e.preventDefault();
         let data = new FormData($('#enter-playlist-form').get(0));

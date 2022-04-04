@@ -1,0 +1,112 @@
+/* The SideNav form */
+
+.navbar-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-logo-container p {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+}
+
+.sidenav {
+    visibility: hidden;
+    margin: 0;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: rgb(3, 3, 3);
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.sidenav a,
+nav {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    color: green;
+    display: block;
+    transition: all 1s ease;
+    cursor: pointer;
+    border-bottom: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidenav .activate {
+    background-color: rgb(32, 18, 160);
+}
+
+.sidenav .hover-green:hover {
+    transition: 0s;
+    color: var(--special-green);
+    text-shadow: 0 0 6px var(--special-green);
+}
+
+.sidenav #links-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidenav .hover-red {
+    font-size: 30px;
+    transition: 1s;
+    color: #fd0f0f;
+}
+
+.sidenav .hover-red:hover {
+    transition: 0s;
+    text-shadow: 0 0 6px #fd0f0f;
+}
+
+
+.sidenav #close-navbar {
+    transition: 1s;
+    color: var(--special-green);
+    font-size: 36px;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+/* sidenav form  */
+
+#playlist-form {
+    cursor: auto;
+}
+
+#playlist-form #links-container {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#playlist-form .list-group-item {
+    overflow-x: auto;
+}
+
+#playlist-form #playlist-pass {
+    opacity: 20%;
+    transition: all ease .5s;
+}
+
+#playlist-form #pass-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-errors {
+    white-space: pre-wrap;
+    color: red;
+    font-size: 11px;
+}

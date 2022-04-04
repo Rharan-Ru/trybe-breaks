@@ -1,0 +1,162 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+
+<aside id="mySidenav" class="sidenav p-2">
+    <div class="navbar-logo-container">
+        <p>Try BBreaks</p>
+        <a class="hover-green" id="close-navbar" onclick="closePlaylistForm()"><i class="fa fa-close"></i></a>
+    </div>
+    <nav id="form-wrapper">
+        <form id="playlist-form" class="mt-5" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="InputTitle" class="form-label">Title</label>
+                <input name="title" type="text" class="form-control" id="InputTitle" required>
+            </div>
+            <div class="mb-3">
+                <label for="authorInput" class="form-label">Author</label>
+                <input name="author" type="text" class="form-control" id="authorInput" required>
+            </div>
+            <div class="mb-1">
+                <label for="visibility-select" class="form-label">Playlist visibility</label>
+                <select name="playlist-priv" id="visibility-select" class="form-select" aria-label="Paylist visibility"
+                    onchange="disableEnablePassInput()">
+                    <option value="0">Public</option>
+                    <option value="1">Private</option>
+                </select>
+                <div id="pass-wrapper" class="mt-1">
+                    <input name="playlist-password" type="password" class="form-control" disabled="true"
+                        id="playlist-pass" required="false" placeholder="Password">
+                    <a class="hover-green" onclick="seeHidePass()">
+                        <i id="pass-icon" class="bi bi-eye-slash-fill"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Playlist Thumb<i
+                        class="bi bi-camera-fill p-2 hover-green"></i></label>
+                <input name=" image" class="form-control" type="file" accept="image/*" required="true" id="formFile">
+            </div>
+            <div class="input-group mb-3">
+                <label for="link-input" class="form-label col-12">Youtube Links</label>
+                <input id="link-input" type="text" class="form-control" placeholder="add a link..."
+                    aria-label="Add a link" required="true">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-info" id="enter" type="button">Add</button>
+                </div>
+                <div class="col-12" id="links-container">
+                    <ul name="music-links" class="list-group">
+                    </ul>
+                </div>
+            </div>
+            <p id="form-errors"></p>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </nav>
+</aside>
+
+<!-- Ajax functions to post data without refresh page -->
+{% block javascript %}
+<script src="{% static 'js/playlist.js' %}"></script>
+<script>
+    $("#playlist-form").submit(function (e) {
+        e.preventDefault();
+        let data = new FormData($('#playlist-form').get(0));
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'playlist-view' %}",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $("#playlist-form").trigger('reset');
+                window.location = '';
+            },
+            error: function (response) {
+                let errorForm = response.responseJSON.msg;
+                let showErrors = document.getElementById("form-errors");
+                showErrors.innerText = errorForm;
+            }
+        })
+    })
+
+    function createLinksElements() {
+        let divWraper = document.createElement("div");
+        divWraper.id = 'links-wrapper';
+
+        let li = document.createElement("li");
+        li.className = 'list-group-item mt-1';
+        li.textContent = inputLink.value;
+        li.style.width = "100%"
+
+        let inputWithValue = document.createElement("input");
+        inputWithValue.name = "links-list";
+        inputWithValue.value = inputLink.value;
+        inputWithValue.type = 'hidden';
+
+        let excludeBtn = document.createElement("a");
+        excludeBtn.className = 'exclude-link';
+        let excludeIcon = document.createElement("i");
+        excludeIcon.className = "fa fa-close hover-red";
+        excludeBtn.appendChild(excludeIcon);
+
+        li.appendChild(inputWithValue);
+        divWraper.appendChild(li);
+        divWraper.appendChild(excludeBtn);
+
+        ulLinks.appendChild(divWraper);
+    }
+
+    buttonLink.addEventListener("click", function () {
+        if (inputLink.value !== '') {
+            createLinksElements();
+            for (var i = 0; i < excludeLinks.length; i++) {
+                excludeLinks[i].addEventListener('click', deleteLink);
+            }
+            inputLink.value = '';
+        }
+        inputLink.required = false;
+    })
+
+    let excludeLinks = document.getElementsByClassName("exclude-link");
+
+    function deleteLink(link) {
+        let target = link.target.parentElement;
+        let divWrapper = target.parentElement;
+        divWrapper.remove();
+    }
+
+    function disableEnablePassInput() {
+        let passInput = document.getElementById("playlist-pass");
+        let selectPublicPrivate = document.getElementById("visibility-select");
+        if (selectPublicPrivate.value == 0) {
+            passInput.disabled = true;
+            passInput.required = false;
+            passInput.style.opacity = '20%'
+            return;
+        }
+        passInput.disabled = false;
+        passInput.required = true;
+        passInput.style.opacity = '100%'
+        return;
+    }
+
+    function seeHidePass() {
+        let passInput = document.getElementById("playlist-pass");
+        let passIcon = document.getElementById("pass-icon");
+
+        if (passInput.type === 'text') {
+            passInput.type = 'password';
+            passIcon.className = 'bi bi-eye-slash-fill'
+            return;
+        }
+        passInput.type = 'text';
+        passIcon.className = 'bi bi-eye-fill';
+        return;
+    }
+</script>
+{% endblock javascript %}
+
+{% endblock content %}
