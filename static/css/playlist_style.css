@@ -73,6 +73,10 @@ body {
     background-color: rgb(10, 10, 10);
     color: white;
     border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 #perfil-container .btn:hover {

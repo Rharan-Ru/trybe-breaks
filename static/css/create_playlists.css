@@ -1,45 +1,64 @@
-/* The SideNav form */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    min-height: 100vh;
+    font-family: 'Press Start 2P', cursive;
+}
+
+i {
+    font-size: 34px;
+    cursor: pointer;
+}
+
+#background-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.3)), url('https://wallpaperaccess.com/full/508929.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#background-image h1, h2 {
+    color: rgb(255, 255, 255);
+    margin-top: 7vh;
+}
+
+/* The SideNav form */
 .navbar-logo-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.navbar-logo-container p {
-    margin: 0;
-    color: white;
-    font-size: 20px;
+.sidenav {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)), url('https://64.media.tumblr.com/f4645376f063b63fc4aee31cc1aff7f4/054d6b5c226061e7-2c/s540x810/99d1247eb080c28dab13f2aa63be91b60bcad0e1.gifv');
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.sidenav {
-    visibility: hidden;
-    margin: 0;
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    background-color: rgb(3, 3, 3);
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.5s;
-}
+.sidenav::before {}
 
 .sidenav a,
 nav {
     padding: 8px;
     text-decoration: none;
     font-size: 14px;
-    color: green;
+    color: white;
     display: block;
     transition: all 1s ease;
-    cursor: pointer;
-    border-bottom: white;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .sidenav .activate {
@@ -99,6 +118,11 @@ nav {
     transition: all ease .5s;
 }
 
+#playlist-form .priv-pass {
+    display: flex;
+    align-items: center;
+}
+
 #playlist-form #pass-wrapper {
     display: flex;
     justify-content: center;
@@ -109,4 +133,23 @@ nav {
     white-space: pre-wrap;
     color: red;
     font-size: 11px;
+}
+
+.btn-submit {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(10, 10, 10);
+    color: white;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(230, 230, 230);
+    color: black;
 }

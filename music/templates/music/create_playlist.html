@@ -1,0 +1,97 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/create_playlists.css' %}">
+<main class="container-fluid p-0 m-0 row">
+    <aside class="col-lg-4 col-sm-12" id="background-image">
+        <h1 class="">Create</h1>
+        <h2>New Playlist</h2>
+    </aside>
+    <aside id="mySidenav" class="sidenav p-2 col-lg-8 col-sm-12">
+        <nav id="form-wrapper">
+            <form id="playlist-form" class="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mt-3">
+                    <div class="col-lg-6 col-sm-12 mt-3">
+                        <input name="title" type="text" class="form-control col-lg-6" id="InputTitle"
+                            placeholder="Title" required>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mt-3">
+                        <input name="author" type="text" class="form-control col-lg-6" id="authorInput"
+                            placeholder="Author" required>
+                    </div>
+                </div>
+
+                <div class="row mt-3 priv-pass">
+                    <div class="col-lg-6 col-sm-12">
+                        <select name="playlist-priv" id="visibility-select" class="form-select"
+                            aria-label="Paylist visibility" onchange="disableEnablePassInput()">
+                            <option value="0">Public</option>
+                            <option value="1">Private</option>
+                        </select>
+                    </div>
+                    <div id="pass-wrapper" class="col-lg-6 col-sm-12">
+                        <input name="playlist-password" type="password" class="form-control" disabled="true"
+                            id="playlist-pass" required="false" placeholder="Password">
+                        <a class="hover-green" onclick="seeHidePass()">
+                            <i id="pass-icon" class="bi bi-eye-slash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="formFile" class="form-label">Playlist Thumb<i
+                            class="bi bi-camera-fill p-2 hover-green"></i></label>
+                    <input name=" image" class="form-control" type="file" accept="image/*" required="true"
+                        id="formFile">
+                </div>
+                <div class="input-group mt-3">
+                    <label for="link-input" class="form-label col-12">Youtube Links</label>
+                    <input id="link-input" type="text" class="form-control" placeholder="add a link..."
+                        aria-label="Add a link" required="true">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light" id="enter" type="button">Add</button>
+                    </div>
+                    <div class="col-12" id="links-container">
+                        <ul name="music-links" class="row m-0 p-0">
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="mt-3" id="form-errors"></h4>
+                <button type="submit" class="btn btn-submit">Create</button>
+            </form>
+        </nav>
+    </aside>
+
+</main>
+
+<!-- Ajax functions to post data without refresh page -->
+{% block javascript %}
+<script src="{% static 'js/create_playlists.js' %}"></script>
+<script>
+    $("#playlist-form").submit(function (e) {
+        e.preventDefault();
+        let data = new FormData($('#playlist-form').get(0));
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'new-playlist' %}",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $("#playlist-form").trigger('reset');
+                window.location = '';
+            },
+            error: function (response) {
+                console.log(response);
+                let errorForm = response.responseJSON.msg;
+                let showErrors = document.getElementById("form-errors");
+                showErrors.innerText = errorForm;
+            }
+        })
+    })
+</script>
+{% endblock javascript %}
+
+{% endblock content %}

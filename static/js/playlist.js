@@ -90,4 +90,4 @@ function dislikePost(slug) {
     })
 }
 
-{/* <script src="https://kit.fontawesome.com/016c7a8b8c.js" crossorigin="anonymous"></script>  */}
+// <script src="https://kit.fontawesome.com/016c7a8b8c.js" crossorigin="anonymous"></script>

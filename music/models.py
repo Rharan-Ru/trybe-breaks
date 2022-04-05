@@ -52,5 +52,9 @@ class PlaylistModel(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(PlaylistModel, self).save(*args, **kwargs)
+        try:
+            self.slug = slugify(self.title)
+            super(PlaylistModel, self).save(*args, **kwargs)
+        except Exception as error:
+            print(error)
+            return

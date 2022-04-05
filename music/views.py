@@ -1,10 +1,65 @@
+from tokenize import String
+from xml.etree.ElementTree import tostring
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
 from .models import PlaylistModel, MusicModel
-from .forms import MyForm
-import random
 from django.views.decorators.csrf import csrf_exempt
+
+
+def remove_duplicates(list1, list2):
+    new_list = []
+    for play in list1:
+        new_list.append(play)
+    for play in list2:
+        if play in new_list:
+            new_list.remove(play)
+        else:
+            new_list.append(play)
+    return new_list
+
+
+class CreateNewPlaylist(View):
+    def get(self, request):
+        return render(request, 'music/create_playlist.html')
+
+    def post(self, request):
+        title = request.POST['title']
+        author = request.POST['author']
+        privacy = request.POST['playlist-priv']
+        links_list = request.POST.getlist('links-list')
+        image = request.FILES['image']
+        try:
+            new_playlist = PlaylistModel(
+                title=title,
+                author=author,
+                privacy=privacy,
+                thumb=image
+            )
+        except Exception as error:
+            return JsonResponse({"msg": "Este título já existe, por favor adicione outro."}, status=400)
+
+        if privacy == '1':
+            playlist_password = request.POST['playlist-password']
+            new_playlist.password = playlist_password
+
+        if len(links_list) > 0:
+            new_playlist.save()
+            for link in links_list:
+                if MusicModel.objects.filter(video_url=link).exists():
+                    music = MusicModel.objects.get(video_url=link)
+                    new_playlist.musics.add(music)
+                else:
+                    try:
+                        music = MusicModel.objects.create(video_url=link)
+                        new_playlist.musics.add(music)
+                    except Exception as error:
+                        new_playlist.delete()
+                        return JsonResponse({"msg": "Link inválido, adicione apenas a url do video."}, status=400)
+        else:
+            return JsonResponse({"msg": "Adicione uma url de video do Youtube."}, status=400)
+        new_playlist.save()
+        return redirect('playlist-view')
 
 
 class MusicsView(View):
@@ -30,18 +85,6 @@ class MusicsView(View):
             return render(request, 'music/index.html', context)
 
 
-def remove_duplicates(list1, list2):
-    new_list = []
-    for play in list1:
-        new_list.append(play)
-    for play in list2:
-        if play in new_list:
-            new_list.remove(play)
-        else:
-            new_list.append(play)
-    return new_list
-
-
 class PlayListView(View):
     def get(self, request):
         playlists = PlaylistModel.objects.all()
@@ -60,43 +103,6 @@ class PlayListView(View):
             'random_playlists': random_playlists,
         }
         return render(request, 'music/playlists.html', context)
-
-    def post(self, request):
-        title = request.POST['title']
-        author = request.POST['author']
-        privacy = request.POST['playlist-priv']
-        links_list = request.POST.getlist('links-list')
-        image = request.FILES['image']
-
-        try:
-            new_playlist = PlaylistModel(
-                title=title,
-                author=author,
-                privacy=privacy,
-                thumb=image
-            )
-        except Exception as error:
-            return JsonResponse({"msg": "Este título já existe, por favor adicione outro."}, status=400)
-
-        if privacy == 1:
-            playlist_password = request.POST['playlist-password']
-            new_playlist.password = playlist_password
-
-        if len(links_list) > 0:
-            new_playlist.save()
-            for link in links_list:
-                if MusicModel.objects.filter(video_url=link).exists():
-                    music = MusicModel.objects.get(video_url=link)
-                    new_playlist.musics.add(music)
-                else:
-                    try:
-                        music = MusicModel.objects.create(video_url=link)
-                        new_playlist.musics.add(music)
-                    except Exception as error:
-                        new_playlist.delete()
-                        return JsonResponse({"msg": "Link inválido, adicione apenas a url do video."}, status=400)
-        new_playlist.save()
-        return redirect('playlist-view')
 
 
 @csrf_exempt
