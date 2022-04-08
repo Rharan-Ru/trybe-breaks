@@ -181,14 +181,31 @@ body {
     border-radius: 5px;
     margin-bottom: 8px;
     display: flex;
+    justify-content: space-around;
 }
 
 .like-me {
     display: flex;
     align-items: center;
     text-decoration: none;
-    width: 33px;
+    width: 70px;
     white-space: normal;
+}
+
+.like-me .bi-eye {
+    color: #d50ffd;
+    font-size: 25px;
+    margin-right: 2px;
+}
+
+.like-me .bi-eye:hover {
+    color: var(--special-green);
+    transition: all ease .7s;
+}
+
+.like-me span {
+    margin: 0;
+    color: white;
 }
 
 .like-me .heart {
@@ -202,19 +219,19 @@ body {
     transition: all ease .7s;
 }
 
-.likes-counter {
-    margin: 0;
-    display: inline;
-    color: white;
-}
-
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 650px) {
     .card-playlist {
         width: 43vw;
     }
 
-    .article {
-        margin-top: 50px;
+    article h5 {
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 650px) and (max-width: 1200px) {
+    .card-playlist {
+        width: 24vw;
     }
 
     article h5 {

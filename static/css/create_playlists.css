@@ -18,8 +18,8 @@ i {
 }
 
 #background-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3),
-            rgba(0, 0, 0, 0.3)), url('https://wallpaperaccess.com/full/508929.png');
+    position: relative;
+    background-image: url('https://wallpaperaccess.com/full/508929.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -27,8 +27,81 @@ i {
     flex-direction: column;
 }
 
-#background-image h1, h2 {
-    color: rgb(255, 255, 255);
+#background-image::before {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(124deg, rgba(255, 34, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(255, 196, 0, 0.3), rgba(251, 255, 0, 0.3), rgba(29, 232, 63, 0.3), rgba(29, 222, 232, 0.3), rgba(43, 29, 232, 0.3), rgba(223, 0, 243, 0.3), rgba(223, 0, 243, 0.3));
+    background-size: 1800% 1800%;
+    -webkit-animation: rainbow 18s ease infinite;
+    -z-animation: rainbow 18s ease infinite;
+    -o-animation: rainbow 18s ease infinite;
+    animation: rainbow 18s ease infinite;
+}
+
+
+@-webkit-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@-moz-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@-o-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+#background-image h1,
+h3 {
+    z-index: 2;
+    color: rgb(15, 15, 15);
     margin-top: 7vh;
 }
 
@@ -40,7 +113,7 @@ i {
 }
 
 .sidenav {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+    background-image: linear-gradient(rgba(44, 25, 99, 0.7),
             rgba(0, 0, 0, 0.7)), url('https://64.media.tumblr.com/f4645376f063b63fc4aee31cc1aff7f4/054d6b5c226061e7-2c/s540x810/99d1247eb080c28dab13f2aa63be91b60bcad0e1.gifv');
     background-position: center;
     background-size: cover;
@@ -49,7 +122,9 @@ i {
     justify-content: center;
 }
 
-.sidenav::before {}
+.sidenav nav {
+    width: 90%;
+}
 
 .sidenav a,
 nav {

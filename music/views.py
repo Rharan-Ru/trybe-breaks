@@ -1,5 +1,3 @@
-from tokenize import String
-from xml.etree.ElementTree import tostring
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
@@ -88,14 +86,14 @@ class MusicsView(View):
 class PlayListView(View):
     def get(self, request):
         playlists = PlaylistModel.objects.all()
-        lasts_playlists = playlists.order_by('-created_at')[0:6]
+        lasts_playlists = playlists.order_by('-created_at')[0:5]
 
         most_view = playlists.order_by('-views').reverse()
-        most_view = remove_duplicates(lasts_playlists, most_view)[0:6]
+        most_view = remove_duplicates(lasts_playlists, most_view)[0:5]
 
         random_playlists = playlists.order_by('?')
         random_playlists = remove_duplicates(lasts_playlists, random_playlists)
-        random_playlists = remove_duplicates(most_view, random_playlists)
+        random_playlists = remove_duplicates(most_view, random_playlists)[0:5]
 
         context = {
             'playlists': lasts_playlists,

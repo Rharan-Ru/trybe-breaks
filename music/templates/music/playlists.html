@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <aside class="col-12 col-md-5 col-lg-3" id="perfil-container">
+    <aside class="col-12 col-md-12 col-lg-3" id="perfil-container">
         <div class="sticky-top" id="menu-wrapper">
             <div class="" style="width: 100%;">
                 <img class="img-fluid" id="avatar"
@@ -45,22 +45,26 @@
         </div>
     </aside>
 
-    <article class="col-12 col-md-7 col-lg-9 article">
+    <article class="col-12 col-md-12 col-lg-9 article">
         <header class="sticky-top" id="header">
             <h3 class="m-0 p-2">Try BBreaks</h3>
             <button class="btn text-white random-playlist"><i class="fa fa-random"></i></button>
         </header>
         <h5 class="text-white">Lasts Playlists Add</h2>
-            <div class="playlists-container row gx-2">
+            <div class="playlists-container row row-cols-5 gx-2">
                 {% for playlist in playlists %}
-                <div class="col-6 col-md-4 col-lg-2 card-playlist mb-3">
+                <div class="card-playlist mb-3">
                     <div class="card" style="border: none;">
                         {% if playlist.privacy %}
                         <div class="playlist-items-container">
-                            <a class="like-me" href="">
+                            <a class="like-me like-link" href="">
                                 <i class="heart bi bi-heart me-2 ms-2"></i>
                                 <span class="likes-counter">{{playlist.likes}}</span>
                             </a>
+                            <div class="like-me">
+                                <i class="bi bi-eye me-2 ms-2"></i>
+                                <span>{{playlist.views}}</span>
+                            </div>
                         </div>
                         <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container"
                             href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
@@ -75,10 +79,14 @@
                         </div>
                         {% else %}
                         <div class="playlist-items-container">
-                            <a class="like-me" href="">
+                            <a class="like-me like-link" href="">
                                 <i class="heart bi bi-heart me-2 ms-2"></i>
                                 <span class="likes-counter">{{playlist.likes}}</span>
                             </a>
+                            <div class="like-me">
+                                <i class="bi bi-eye me-2 ms-2"></i>
+                                <span>{{playlist.views}}</span>
+                            </div>
                         </div>
                         <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                             <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />
@@ -95,16 +103,20 @@
             </div>
 
             <h5 class="text-white">Most Views Playlists</h5>
-            <div class="playlists-container row gx-2">
+            <div class="playlists-container row row-cols-5 gx-2">
                 {% for playlist in most_views %}
-                <div class="col-6 col-md-4 col-lg-2 card-playlist mb-3">
+                <div class="card-playlist mb-3">
                     <div class="card" style="border: none;">
                         {% if playlist.privacy %}
                         <div class="playlist-items-container">
-                            <a class="like-me" href="">
+                            <a class="like-me like-link" href="">
                                 <i class="heart bi bi-heart me-2 ms-2"></i>
                                 <span class="likes-counter">{{playlist.likes}}</span>
                             </a>
+                            <div class="like-me">
+                                <i class="bi bi-eye me-2 ms-2"></i>
+                                <span>{{playlist.views}}</span>
+                            </div>
                         </div>
                         <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container"
                             href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
@@ -119,10 +131,14 @@
                         </div>
                         {% else %}
                         <div class="playlist-items-container">
-                            <a class="like-me" href="">
+                            <a class="like-me like-link" href="">
                                 <i class="heart bi bi-heart me-2 ms-2"></i>
                                 <span class="likes-counter">{{playlist.likes}}</span>
                             </a>
+                            <div class="like-me">
+                                <i class="bi bi-eye me-2 ms-2"></i>
+                                <span>{{playlist.views}}</span>
+                            </div>
                         </div>
                         <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                             <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />
@@ -139,16 +155,20 @@
             </div>
 
             <h5 class="text-white">Random Playlists</h5>
-            <div class="playlists-container row gx-2">
+            <div class="playlists-container row row-cols-5 gx-2">
                 {% for playlist in random_playlists %}
-                <div class="col-6 col-md-4 col-lg-2 card-playlist mb-3">
+                <div class="card-playlist mb-3">
                     <div class="card" style="border: none;">
                         {% if playlist.privacy %}
                         <div class="playlist-items-container">
-                            <a class="like-me" href="">
+                            <a class="like-me like-link" href="">
                                 <i class="heart bi bi-heart me-2 ms-2"></i>
                                 <span class="likes-counter">{{playlist.likes}}</span>
                             </a>
+                            <div class="like-me">
+                                <i class="bi bi-eye me-2 ms-2"></i>
+                                <span>{{playlist.views}}</span>
+                            </div>
                         </div>
                         <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container"
                             href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
@@ -163,10 +183,14 @@
                         </div>
                         {% else %}
                         <div class="playlist-items-container">
-                            <a class="like-me" href="">
+                            <a class="like-me like-link" href="">
                                 <i class="heart bi bi-heart me-2 ms-2"></i>
                                 <span class="likes-counter">{{playlist.likes}}</span>
                             </a>
+                            <div class="like-me">
+                                <i class="bi bi-eye me-2 ms-2"></i>
+                                <span>{{playlist.views}}</span>
+                            </div>
                         </div>
                         <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                             <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />

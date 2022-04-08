@@ -9,7 +9,7 @@ for (var i = 0; i < playlistsFocusSlug.length; i++) {
     playlistsFocusSlug[i].addEventListener('click', focusPlaylist);
 }
 
-document.querySelectorAll('.like-me').forEach(item => {
+document.querySelectorAll('.like-link').forEach(item => {
     item.addEventListener('click', evt => {
         evt.preventDefault();
         let targetLikesCounter = evt.target.nextElementSibling;
@@ -19,11 +19,12 @@ document.querySelectorAll('.like-me').forEach(item => {
             targetLikesCounter.innerHTML = Number(targetLikesCounter.innerHTML) - 1;
             removeLikesData(targetSlug);
             return;
+        } else if (evt.target.className.includes('bi-heart')) {
+            targetLikesCounter.innerHTML = Number(targetLikesCounter.innerHTML) + 1;
+            evt.target.className = 'heart bi bi-heart-fill me-2 ms-2';
+            saveLikesData(targetSlug);
+            return;
         }
-        targetLikesCounter.innerHTML = Number(targetLikesCounter.innerHTML) + 1;
-        evt.target.className = 'heart bi bi-heart-fill me-2 ms-2';
-        saveLikesData(targetSlug);
-        return;
     })
 })
 
@@ -59,7 +60,7 @@ function removeLikesData(data) {
 }
 
 window.onload = () => {
-    document.querySelectorAll('.like-me').forEach(item => {
+    document.querySelectorAll('.like-link').forEach(item => {
         const targetSlug = item.offsetParent.children[1].id;
         const likes = JSON.parse(localStorage.getItem('likes'));
         if (likes.includes(targetSlug)) {
