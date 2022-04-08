@@ -50,7 +50,7 @@
             <h3 class="m-0 p-2">Try BBreaks</h3>
             <button class="btn text-white random-playlist"><i class="fa fa-random"></i></button>
         </header>
-        <h5 class="text-white">Lasts Playlists Add</h2>
+        <h5 class="text-white mt-5">Lasts Playlists Add</h2>
             <div class="playlists-container row row-cols-5 gx-2">
                 {% for playlist in playlists %}
                 <div class="card-playlist mb-3">
@@ -66,7 +66,7 @@
                                 <span>{{playlist.views}}</span>
                             </div>
                         </div>
-                        <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container"
+                        <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container get-random"
                             href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
                             <img class="card-img-top img-fluid playlist-thumb priv" src="{{ playlist.thumb.url }}" />
                             <i class="bi bi-lock-fill priv-icon"></i>
@@ -88,7 +88,7 @@
                                 <span>{{playlist.views}}</span>
                             </div>
                         </div>
-                        <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
+                        <a class="get-random" id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                             <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />
                         </a>
                         <div class="card-body p-0 mt-3">
@@ -102,7 +102,7 @@
                 {% endfor %}
             </div>
 
-            <h5 class="text-white">Most Views Playlists</h5>
+            <h5 class="text-white mt-5">Most Views Playlists</h5>
             <div class="playlists-container row row-cols-5 gx-2">
                 {% for playlist in most_views %}
                 <div class="card-playlist mb-3">
@@ -118,7 +118,7 @@
                                 <span>{{playlist.views}}</span>
                             </div>
                         </div>
-                        <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container"
+                        <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container get-random"
                             href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
                             <img class="card-img-top img-fluid playlist-thumb priv" src="{{ playlist.thumb.url }}" />
                             <i class="bi bi-lock-fill priv-icon"></i>
@@ -140,7 +140,7 @@
                                 <span>{{playlist.views}}</span>
                             </div>
                         </div>
-                        <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
+                        <a class="get-random" id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                             <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />
                         </a>
                         <div class="card-body p-0 mt-3">
@@ -154,7 +154,7 @@
                 {% endfor %}
             </div>
 
-            <h5 class="text-white">Random Playlists</h5>
+            <h5 class="text-white mt-5">Random Playlists</h5>
             <div class="playlists-container row row-cols-5 gx-2">
                 {% for playlist in random_playlists %}
                 <div class="card-playlist mb-3">
@@ -170,7 +170,7 @@
                                 <span>{{playlist.views}}</span>
                             </div>
                         </div>
-                        <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container"
+                        <a id="{{playlist.slug}}" class="get-playlist-slug playlist-img-container get-random"
                             href="musics/{{playlist.slug}}" data-bs-toggle="modal" data-bs-target="#pass-modal">
                             <img class="card-img-top img-fluid playlist-thumb priv" src="{{ playlist.thumb.url }}" />
                             <i class="bi bi-lock-fill priv-icon"></i>
@@ -192,7 +192,7 @@
                                 <span>{{playlist.views}}</span>
                             </div>
                         </div>
-                        <a id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
+                        <a class="get-random" id="{{playlist.slug}}" href="musics/{{playlist.slug}}">
                             <img class="card-img-top img-fluid playlist-thumb" src="{{ playlist.thumb.url }}" />
                         </a>
                         <div class="card-body p-0 mt-3">

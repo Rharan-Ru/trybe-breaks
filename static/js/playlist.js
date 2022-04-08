@@ -5,6 +5,7 @@ let playlistsFocusSlug = document.getElementsByClassName("get-playlist-slug");
 function focusPlaylist(event) {
     playlistSlugActive = event.srcElement.parentElement.id;
 }
+
 for (var i = 0; i < playlistsFocusSlug.length; i++) {
     playlistsFocusSlug[i].addEventListener('click', focusPlaylist);
 }
@@ -91,4 +92,12 @@ function dislikePost(slug) {
     })
 }
 
+const btnRandom = document.getElementsByClassName('random-playlist')[0];
+
+btnRandom.addEventListener('click', () => {
+    const allSlugs = document.querySelectorAll('.get-random');
+    const randNumber = Math.floor(Math.random() * allSlugs.length);
+    const randomPlaylist = allSlugs[randNumber];
+    window.location = `/musics/${randomPlaylist.id}`
+})
 // <script src="https://kit.fontawesome.com/016c7a8b8c.js" crossorigin="anonymous"></script>

@@ -27,7 +27,7 @@ body {
 #pass-modal .modal-content {
     background-color: rgb(10, 10, 10);
     border-radius: 0;
-    width: 600px;
+    max-width: 100%;
 }
 
 #header {

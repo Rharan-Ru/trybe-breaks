@@ -16,6 +16,9 @@ i {
     font-size: 34px;
     cursor: pointer;
 }
+.bi-arrow-left {
+    font-size: 18px;
+}
 
 #background-image {
     position: relative;

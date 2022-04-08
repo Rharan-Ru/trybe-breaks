@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
+from requests import session
 from .models import PlaylistModel, MusicModel
 from django.views.decorators.csrf import csrf_exempt
 
@@ -63,24 +64,29 @@ class CreateNewPlaylist(View):
 class MusicsView(View):
     def get(self, request, slug):
         playlist = PlaylistModel.objects.get(slug=slug)
-        first_music = playlist.musics.all()[0].music_id
-        print(first_music)
-        playlist.views += 1
-        playlist.save()
-        try:
-            if request.session['slug'] == slug:
+        if playlist.privacy == True:
+            if request.session[slug] == True:
+                first_music = playlist.musics.all()[0].music_id
+                playlist.views += 1
+                playlist.save()
+                print('privado')
                 request.session[slug] = ''
                 context = {
                     'playlist': playlist,
                     'first_music': first_music,
                 }
                 return render(request, 'music/index.html', context)
-        except:
-            context = {
-                'playlist': playlist,
-                'first_music': first_music,
-            }
-            return render(request, 'music/index.html', context)
+            else:
+                return redirect('playlist-view')
+        first_music = playlist.musics.all()[0].music_id
+        playlist.views += 1
+        playlist.save()
+        print('public')
+        context = {
+            'playlist': playlist,
+            'first_music': first_music,
+        }
+        return render(request, 'music/index.html', context)
 
 
 class PlayListView(View):
