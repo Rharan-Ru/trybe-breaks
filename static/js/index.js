@@ -1,14 +1,36 @@
+let hasStarted = false;
+// Video buttons control
+let paused = true;
+let hasGif = true;
+const videoContain = document.getElementById('contain-video');
+
+// Get random gifs variables
+let gifBack;
+let giphyURL;
+let newGif;
+let renderGif;
+let musicIds = [];
+let currentMusic;
+
+// Giphy API defaults
+const giphy = {
+    baseURL: "https://api.giphy.com/v1/gifs/",
+    apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
+    // tag: "eniac",
+    tag: "8bit-art",
+    type: "random",
+};
+
 // Create Youtube embed player control - documentation reference: https://developers.google.com/youtube/iframe_api_reference
 
+// Player variables
+let player;
 let tag = document.createElement('script');
+let playerVolume = 50;
+let firstScriptTag = document.getElementsByTagName('script')[0];
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
-let playerVolume = 50;
-
-let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-let player;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-music', {
@@ -33,9 +55,44 @@ function onPlayerStateChange(event) {
     }
 }
 
-// Video buttons control
-let paused = true;
-let hasGif = true;
+// Functions to open and close navbar
+function openNav() {
+    document.getElementById("open-nav").style.opacity = '0';
+    document.getElementById("close-navbar").style.opacity = '100%';
+    document.getElementById("mySidenav").style.width = "300px";
+    document.getElementById("main").style.marginLeft = "300px";
+};
+
+function closeNav() {
+    document.getElementById("open-nav").style.opacity = '100%';
+    document.getElementById("close-navbar").style.opacity = '0';
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+};
+
+// All player control/interactive functions
+// Functions to go to next music video or previous music video
+function nextMusic() {
+    currentMusic.className = 'row thumb';
+    currentMusic = currentMusic.nextElementSibling;
+    if (currentMusic === null) {
+        currentMusic = document.getElementById(musicIds[0]);
+    };
+    currentMusic.className = 'activate row thumb';
+    changeVideo(currentMusic.id);
+    return;
+}
+
+function prevMusic() {
+    currentMusic.className = 'row thumb';
+    currentMusic = currentMusic.previousElementSibling;
+    if (currentMusic === null) {
+        currentMusic = document.getElementById(musicIds[musicIds.length - 1]);
+    };
+    currentMusic.className = 'activate row thumb';
+    changeVideo(currentMusic.id);
+    return;
+}
 
 // This function play and pause video by you state reference
 function playPauseVideo() {
@@ -55,19 +112,17 @@ function playPauseVideo() {
 // Set volume player
 function setVolume(event) {
     player.setVolume(event);
-    return;
 };
 
 // Change video by id
 function changeVideo(id) {
-    currentMusic.className = '';
+    currentMusic.className = 'row thumb';
     currentMusic = document.getElementById(id);
-    currentMusic.className = 'activate';
+    currentMusic.className = 'activate row thumb';
 
     let ytVideoMusic = document.getElementById('youtube-music');
     let videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
     let newSrc;
-
     try {
         if (!paused) {
             newSrc = ytVideoMusic.src.replace('autoplay=0', 'autoplay=1').replace(videoId, id);
@@ -78,15 +133,15 @@ function changeVideo(id) {
         }
     } finally {
         return;
-    };
-};
+    }
+}
 
 // Get a random video-music
 function randomVideo() {
     let randomMusic = musicIds[Math.floor((Math.random() * musicIds.length))];
     changeVideo(randomMusic);
     newGif();
-};
+}
 
 // Switch to original video
 function getOriginalVideo() {
@@ -97,37 +152,17 @@ function getOriginalVideo() {
     };
     document.getElementById('gif-background').style.opacity = '1';
     hasGif = true;
-};
+}
 
-// Change gif animation
-function changeGif() {
-    document.getElementById('gif-background').style = 'opacity: 0;';
-};
-
-// Get random gifs
-let gifBack;
-let giphyURL;
-let newGif;
-let renderGif;
-let musicIds = [];
-let currentMusic;
 
 // Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
 $(document).ready(function () {
-    musicIds = [...document.querySelectorAll('#musics > a')].map(({
-        id
-    }) => id);
-    currentMusic = document.getElementById(musicIds[0]);
-    currentMusic.className = 'activate';
+    // Define current music onload
+    let musicFirst = document.querySelector('#musics > a');
+    console.log(musicFirst);
+    musicFirst.className = 'activate row thumb';
+    currentMusic = musicFirst;
 
-    // Giphy API defaults
-    const giphy = {
-        baseURL: "https://api.giphy.com/v1/gifs/",
-        apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
-        // tag: "eniac",
-        tag: "8bit-art",
-        type: "random",
-    };
     // Target gif-wrap container
     gifBack = document.getElementById('gif-background');
     // Giphy API URL
@@ -151,18 +186,17 @@ $(document).ready(function () {
     newGif();
 });
 
-let hasStarted = false;
 if (hasStarted === false) {
-    document.onkeydown = keyPressed;
-    document.onclick = clickEvent;
+    window.onkeydown = keyPressed;
+    window.onclick = clickEvent;
 
-    function keyPressed(k) {
+    function keyPressed() {
         if (hasStarted === false) {
             start();
         }
     };
 
-    function clickEvent(k) {
+    function clickEvent() {
         if (hasStarted === false) {
             start();
         }
@@ -173,6 +207,9 @@ function start() {
     playPauseVideo();
     document.getElementById('video-title').innerHTML = player.getVideoData().title;
     document.onkeydown = keyPressed;
+    videoContain.addEventListener('click', () => {
+        playPauseVideo();
+    });
 
     function keyPressed(k) {
         console.log(k);
@@ -182,7 +219,6 @@ function start() {
         let gif = 71;
         let nextGif = 78;
         let random = 82;
-
         let volRight = 39;
         let volLeft = 37;
         switch (k.keyCode) {
@@ -218,43 +254,3 @@ function start() {
     };
     return hasStarted = true;
 };
-
-
-// Functions to open and close navbar
-function openNav() {
-    document.getElementById("open-nav").style.opacity = '0';
-    document.getElementById("close-navbar").style.opacity = '100%';
-    document.getElementById("mySidenav").style.width = "300px";
-    document.getElementById("main").style.marginLeft = "300px";
-};
-
-function closeNav() {
-    document.getElementById("open-nav").style.opacity = '100%';
-    document.getElementById("close-navbar").style.opacity = '0';
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-};
-
-
-// Functions to go to next music video or previous music video
-function nextMusic() {
-    currentMusic.className = '';
-    currentMusic = currentMusic.nextElementSibling;
-    if (currentMusic === null) {
-        currentMusic = document.getElementById(musicIds[0]);
-    };
-    currentMusic.className = 'activate';
-    changeVideo(currentMusic.id);
-    return;
-}
-
-function prevMusic() {
-    currentMusic.className = '';
-    currentMusic = currentMusic.previousElementSibling;
-    if (currentMusic === null) {
-        currentMusic = document.getElementById(musicIds[musicIds.length - 1]);
-    };
-    currentMusic.className = 'activate';
-    changeVideo(currentMusic.id);
-    return;
-}

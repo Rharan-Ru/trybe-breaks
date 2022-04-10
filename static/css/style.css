@@ -10,6 +10,17 @@
     --bg-color: black;
 }
 
+.thumb {
+    height: 40px;
+    text-decoration: none;
+}
+
+.thumb img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 #gif-background {
     height: 100vh;
     width: 100%;
@@ -29,9 +40,70 @@
     left: 0;
     right: 0;
     overflow: hidden;
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
+    background-image: linear-gradient(to right, #051937, #031d4d, #141e62, #2e1b74, #4c0b82);
+    background-size: 1800% 1800%;
+    -webkit-animation: rainbow 10s ease infinite;
+    -z-animation: rainbow 10s ease infinite;
+    -o-animation: rainbow 10s ease infinite;
+    animation: rainbow 10s ease infinite;
 }
 
+@-webkit-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@-moz-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@-o-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
 
 #contain-video::before {
     content: '';
@@ -91,16 +163,25 @@
 
 #container-btn {
     position: fixed;
-    bottom: 8vh;
-    padding: 10px;
+    bottom: 0;
+    padding: 8px;
+    width: 100%;
 }
 
-#container-btn .fa {
+#container-btn i {
     margin: 8px;
-    font-size: 20px;
+    font-size: 25px;
     color: white;
     cursor: pointer;
     transition: all 1s ease;
+    border: 2px solid #2bfd0f;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(14, 14, 14, .7);
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 #container-btn .fa:hover {
@@ -111,10 +192,16 @@
 
 #buttons-wrap {
     display: flex;
+    flex-wrap: wrap;
 }
 
 #volume-wrap {
     display: flex;
+}
+
+#volume-wrap input {
+    height: auto;
+    max-width: 200px;
 }
 
 #container-title {
@@ -143,16 +230,19 @@
 }
 
 /* The navigation menu links */
-.sidenav a, nav {
-    padding: 8px;
+.sidenav div,
+p {
     text-decoration: none;
-    font-size: 14px;
-    color: green;
-    display: block;
+    font-size: 12px;
+    color: #2bfd0f;
     transition: all 1s ease;
     cursor: pointer;
     border-bottom: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
     white-space: nowrap;
+    width: 100vw;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -226,7 +316,7 @@ input[type=range]::-moz-range-track {
     height: 5px;
     cursor: pointer;
     box-shadow: 0px 0px 0px #000000;
-    background: #036b52;
+    background: #2bfd0f;
     border-radius: 1px;
     border: 0px solid #000000;
 }

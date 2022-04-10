@@ -47,12 +47,17 @@ class PlaylistModel(models.Model):
     created_at = models.DateField(default=now())
     views = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
+    thumb_url = models.CharField(max_length=10000, null=True, blank=True)
 
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
         try:
+            if self.musics:
+                music_test = self.musics.all()[0]
+                self.thumb_url = music_test.image_url
+                print('teste')
             self.slug = slugify(self.title)
             super(PlaylistModel, self).save(*args, **kwargs)
         except Exception as error:
