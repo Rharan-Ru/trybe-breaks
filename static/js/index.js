@@ -154,55 +154,6 @@ function getOriginalVideo() {
     hasGif = true;
 }
 
-
-// Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
-$(document).ready(function () {
-    // Define current music onload
-    let musicFirst = document.querySelector('#musics > a');
-    console.log(musicFirst);
-    musicFirst.className = 'activate row thumb';
-    currentMusic = musicFirst;
-
-    // Target gif-wrap container
-    gifBack = document.getElementById('gif-background');
-    // Giphy API URL
-    giphyURL = encodeURI(
-        giphy.baseURL +
-        giphy.type +
-        "?api_key=" +
-        giphy.apiKey +
-        "&tag=" +
-        giphy.tag
-    );
-
-    // Call Giphy API and render data
-    newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
-
-    // Display Gif in gif wrap container
-    renderGif = _giphy => {
-        // Set gif as bg image
-        gifBack.style.backgroundImage = "url(" + _giphy.images.original.url + ")";
-    };
-    newGif();
-});
-
-if (hasStarted === false) {
-    window.onkeydown = keyPressed;
-    window.onclick = clickEvent;
-
-    function keyPressed() {
-        if (hasStarted === false) {
-            start();
-        }
-    };
-
-    function clickEvent() {
-        if (hasStarted === false) {
-            start();
-        }
-    };
-};
-
 function start() {
     playPauseVideo();
     document.getElementById('video-title').innerHTML = player.getVideoData().title;
@@ -212,7 +163,6 @@ function start() {
     });
 
     function keyPressed(k) {
-        console.log(k);
         let pause = 80;
         let next = 68;
         let prev = 65;
@@ -253,4 +203,53 @@ function start() {
         };
     };
     return hasStarted = true;
+};
+
+// Start new random gif, reference used: https://codepen.io/ChynoDeluxe/pen/WGQzWW
+$(document).ready(function () {
+    // Define current music onload
+    musicIds = [...document.querySelectorAll('#musics > a')].map(({
+        id
+    }) => id);
+    currentMusic = document.getElementById(musicIds[0]);
+    currentMusic.className = 'activate row thumb';
+
+    // Target gif-wrap container
+    gifBack = document.getElementById('gif-background');
+    // Giphy API URL
+    giphyURL = encodeURI(
+        giphy.baseURL +
+        giphy.type +
+        "?api_key=" +
+        giphy.apiKey +
+        "&tag=" +
+        giphy.tag
+    );
+
+    // Call Giphy API and render data
+    newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
+
+    // Display Gif in gif wrap container
+    renderGif = _giphy => {
+        // Set gif as bg image
+        gifBack.style.backgroundImage = "url(" + _giphy.images.original.url + ")";
+    };
+    newGif();
+});
+
+if (hasStarted === false) {
+    window.onkeydown = keyPressed;
+    window.onclick = clickEvent;
+
+    function keyPressed() {
+        if (hasStarted === false) {
+            start();
+        }
+    };
+
+    function clickEvent() {
+        if (hasStarted === false) {
+            start();
+        }
+    };
 };
