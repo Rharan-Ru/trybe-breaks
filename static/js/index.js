@@ -24,13 +24,13 @@ const giphy = {
 // Create Youtube embed player control - documentation reference: https://developers.google.com/youtube/iframe_api_reference
 
 // Player variables
-let player;
 let tag = document.createElement('script');
 let playerVolume = 50;
 let firstScriptTag = document.getElementsByTagName('script')[0];
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+let player;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-music', {
@@ -97,6 +97,7 @@ function prevMusic() {
 // This function play and pause video by you state reference
 function playPauseVideo() {
     let play = document.getElementById('play-pause-video');
+    console.log(player);
     if (paused) {
         play.innerHTML = '<i class="fa fa-pause"></i>';
         player.playVideo();
@@ -154,6 +155,7 @@ function getOriginalVideo() {
     hasGif = true;
 }
 
+
 function start() {
     playPauseVideo();
     document.getElementById('video-title').innerHTML = player.getVideoData().title;
@@ -163,6 +165,7 @@ function start() {
     });
 
     function keyPressed(k) {
+        console.log(k);
         let pause = 80;
         let next = 68;
         let prev = 65;
