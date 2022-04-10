@@ -128,9 +128,15 @@ function changeVideo(id) {
         if (!paused) {
             newSrc = ytVideoMusic.src.replace('autoplay=0', 'autoplay=1').replace(videoId, id);
             ytVideoMusic.src = newSrc;
+            if (window && window.navigator && window.navigator.connection && window.navigator.connection.type) {
+                playPauseVideo();
+            }
         } else {
             newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
             ytVideoMusic.src = newSrc;
+            if (window && window.navigator && window.navigator.connection && window.navigator.connection.type) {
+                playPauseVideo();
+            }
         }
     } finally {
         return;
