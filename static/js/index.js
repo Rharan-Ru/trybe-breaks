@@ -134,9 +134,6 @@ function changeVideo(id) {
         } else {
             newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
             ytVideoMusic.src = newSrc;
-            if (window && window.navigator && window.navigator.connection && window.navigator.connection.type) {
-                playPauseVideo();
-            }
         }
     } finally {
         return;
