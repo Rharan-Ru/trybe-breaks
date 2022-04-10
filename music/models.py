@@ -43,7 +43,7 @@ class PlaylistModel(models.Model):
     musics = models.ManyToManyField(MusicModel, blank=True, null=True)
     privacy = models.BooleanField(default=False)
     password = models.CharField(max_length=30, blank=True, null=True)
-    thumb = models.ImageField(upload_to='thumb/', blank=True)
+    thumb = models.ImageField(upload_to='thumb/', blank=True, null=True)
     created_at = models.DateField(default=now())
     views = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
@@ -54,8 +54,9 @@ class PlaylistModel(models.Model):
 
     def save(self, *args, **kwargs):
         try:
+            super(PlaylistModel, self).save(*args, **kwargs)
             if self.musics:
-                music_test = self.musics.all()[0]
+                music_test = self.musics.all().order_by('?')[0]
                 self.thumb_url = music_test.image_url
                 print('teste')
             self.slug = slugify(self.title)

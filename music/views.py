@@ -27,13 +27,11 @@ class CreateNewPlaylist(View):
         author = request.POST['author']
         privacy = request.POST['playlist-priv']
         links_list = request.POST.getlist('links-list')
-        image = request.FILES['image']
         try:
             new_playlist = PlaylistModel(
                 title=title,
                 author=author,
                 privacy=privacy,
-                thumb=image
             )
         except Exception as error:
             return JsonResponse({"msg": "Este título já existe, por favor adicione outro."}, status=400)
