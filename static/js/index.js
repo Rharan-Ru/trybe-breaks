@@ -45,6 +45,9 @@ function onPlayerReady(event) {
     event.target.setVolume(playerVolume);
     if (hasStarted) {
         document.getElementById('video-title').innerHTML = player.getVideoData().title;
+        if (paused == false) {
+            player.playVideo();
+        }
     }
     return;
 }
@@ -97,7 +100,6 @@ function prevMusic() {
 // This function play and pause video by you state reference
 function playPauseVideo() {
     let play = document.getElementById('play-pause-video');
-    console.log(player);
     if (paused) {
         play.innerHTML = '<i class="fa fa-pause"></i>';
         player.playVideo();
@@ -125,16 +127,8 @@ function changeVideo(id) {
     let videoId = ytVideoMusic.src.split('/')[4].split('?')[0];
     let newSrc;
     try {
-        if (!paused) {
-            newSrc = ytVideoMusic.src.replace('autoplay=0', 'autoplay=1').replace(videoId, id);
-            ytVideoMusic.src = newSrc;
-            if (window && window.navigator && window.navigator.connection && window.navigator.connection.type) {
-                playPauseVideo();
-            }
-        } else {
-            newSrc = ytVideoMusic.src.replace('autoplay=1', 'autoplay=0').replace(videoId, id);
-            ytVideoMusic.src = newSrc;
-        }
+        newSrc = ytVideoMusic.src.replace(videoId, id);
+        ytVideoMusic.src = newSrc;
     } finally {
         return;
     }
