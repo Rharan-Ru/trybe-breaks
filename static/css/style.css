@@ -8,6 +8,37 @@
 
 :root {
     --bg-color: black;
+    --default-color: #2bfd0f;
+}
+
+.go-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin: 10px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    text-decoration: none;
+    padding: 13px;
+    background-color: #141414;
+    border-radius: 5px;
+    color: white;
+    transition: all ease .5s;
+}
+
+.go-home i {
+    font-size: 21px;
+}
+
+.go-home:hover {
+    background-color: white;
+    color:rgba(14, 14, 14, .7)
+}
+
+.go-home:hover, .go-home:active i {
+    color: var(--default-color);
 }
 
 .thumb {
@@ -19,6 +50,21 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.thumb p {
+    text-decoration: none;
+    font-size: 12px;
+    color: var(--default-color);
+    transition: all 1s ease;
+    cursor: pointer;
+    border-bottom: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #gif-background {
@@ -157,8 +203,8 @@
 
 #container-list .fa:hover {
     transition: 0s;
-    color: #2bfd0f;
-    text-shadow: 0 0 25px #2bfd0f;
+    color: var(--default-color);
+    text-shadow: 0 0 25px var(--default-color);
 }
 
 #container-btn {
@@ -174,7 +220,7 @@
     color: white;
     cursor: pointer;
     transition: all 1s ease;
-    border: 2px solid #2bfd0f;
+    border: 2px solid var(--default-color);
     border-radius: 10px;
     padding: 10px;
     background-color: rgba(14, 14, 14, .7);
@@ -186,8 +232,8 @@
 
 #container-btn .fa:hover {
     transition: 0s;
-    color: #2bfd0f;
-    text-shadow: 0 0 25px #2bfd0f;
+    color: var(--default-color);
+    text-shadow: 0 0 25px var(--default-color);
 }
 
 #buttons-wrap {
@@ -211,7 +257,24 @@
     padding: 10px;
     justify-content: center;
     align-items: center;
+}
 
+#video-title {
+    text-decoration: none;
+    font-size: 12px;
+    color: var(--default-color);
+    transition: all 1s ease;
+    cursor: pointer;
+    border-bottom: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
+    white-space: nowrap;
+    width: 100vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding: 8px;
 }
 
 /* The side navigation menu, reference: https://www.w3schools.com/howto/howto_js_off-canvas.asp */
@@ -230,21 +293,10 @@
 }
 
 /* The navigation menu links */
-.sidenav div,
-p {
+.sidenav div {
     text-decoration: none;
-    font-size: 12px;
-    color: #2bfd0f;
-    transition: all 1s ease;
-    cursor: pointer;
-    border-bottom: white;
-    overflow: hidden;
-    text-overflow: ellipsis;
     height: 100%;
-    white-space: nowrap;
-    width: 100vw;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .sidenav .activate {
@@ -253,14 +305,14 @@ p {
 
 .sidenav a:hover {
     transition: 0s;
-    color: #2bfd0f;
-    text-shadow: 0 0 12px #2bfd0f;
+    color: var(--default-color);
+    text-shadow: 0 0 12px var(--default-color);
 }
 
 .sidenav #close-navbar {
     position: absolute;
     transition: 1s;
-    color: #2bfd0f;
+    color: var(--default-color);
     top: 0;
     right: 25px;
     font-size: 36px;
@@ -316,7 +368,7 @@ input[type=range]::-moz-range-track {
     height: 5px;
     cursor: pointer;
     box-shadow: 0px 0px 0px #000000;
-    background: #2bfd0f;
+    background: var(--default-color);
     border-radius: 1px;
     border: 0px solid #000000;
 }
@@ -349,7 +401,7 @@ input[type=range]::-ms-track {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: .5rem;
+    padding: 8px;
     box-sizing: border-box;
 }
 
@@ -363,7 +415,7 @@ input[type=range]::-ms-track {
 
 .playing-bar1 {
     height: 60%;
-    background-color: #2bfd0f;
+    background-color: var(--default-color);
 }
 
 .playing-bar2 {
