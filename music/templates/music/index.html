@@ -23,8 +23,10 @@
         <div id="contain-video">
             <div id="pointer-events">
                 <div style="width: 100%; height: 100%">
-                    <iframe id="youtube-music" width="100%" height="100%" title="Youtube Music Video"
-                        src="https://www.youtube.com/embed/{{ first_music }}?autoplay=0&mute=0&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1&playerapiid=ytplayer">
+                    <iframe id="youtube-music"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        type="text/html" width="100%" height="100%" title="Youtube Music Video"
+                        src="https://www.youtube.com/embed/{{ first_music }}?autoplay=0&mute=0&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1&playerapiid=ytplayer&origin=https://youtube.com" frameborder="0">
                     </iframe>
                 </div>
             </div>
