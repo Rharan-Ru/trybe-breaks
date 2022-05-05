@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+import django_heroku
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +29,7 @@ SECRET_KEY = 'django-insecure-+ol4t=1j183#n8*^#uwej6mq5+7zu2%*%1=#6)zb26gmfyh_se
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'trybe-breaks.herokuapp.com']
 
 
 # Application definition
@@ -78,13 +81,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('postgres://pvkxydmwyethzk:e735befde6dab5eef90cb2ff6ac82620fa48de54b47f2c3ccfa1e6dce7d9f557@ec2-18-214-134-226.compute-1.amazonaws.com:5432/d74mco5bmbl3os')
+    )
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://:p9a9bdd04417d5d48abb45e660a25437bf7e1226639372897ba79df07cb88af36@ec2-34-200-100-197.compute-1.amazonaws.com:18869',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

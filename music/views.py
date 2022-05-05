@@ -6,6 +6,7 @@ from .models import PlaylistModel, MusicModel
 from django.views.decorators.csrf import csrf_exempt
 
 
+
 def remove_duplicates(list1, list2):
     new_list = []
     for play in list1:
