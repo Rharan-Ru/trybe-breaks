@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
-import dj_database_url
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,9 +86,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('postgres://pvkxydmwyethzk:e735befde6dab5eef90cb2ff6ac82620fa48de54b47f2c3ccfa1e6dce7d9f557@ec2-18-214-134-226.compute-1.amazonaws.com:5432/d74mco5bmbl3os')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd74mco5bmbl3os',
+        'HOST': 'ec2-18-214-134-226.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'pvkxydmwyethzk',
+        'PASSWORD': 'e735befde6dab5eef90cb2ff6ac82620fa48de54b47f2c3ccfa1e6dce7d9f557',
+    }
 }
 
 CACHES = {
