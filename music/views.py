@@ -4,6 +4,7 @@ from django.views import View
 from requests import session
 from .models import PlaylistModel, MusicModel
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_page
 
 
 
@@ -108,6 +109,7 @@ class PlayListView(View):
         return render(request, 'music/playlists.html', context)
 
 
+@cache_page(60 * 15)
 @csrf_exempt
 def playlist_password(request, slug):
     if request.method == "POST":
@@ -120,6 +122,7 @@ def playlist_password(request, slug):
         return JsonResponse({"msg": "Senha inválida."}, status=400)
 
 
+@cache_page(60 * 15)
 @csrf_exempt
 def like_view(request, slug):
     if request.method == "POST":
@@ -130,6 +133,7 @@ def like_view(request, slug):
         return JsonResponse({"msg": "Liked"}, status=200)
 
 
+@cache_page(60 * 15)
 @csrf_exempt
 def dislike_view(request, slug):
     if request.method == "POST":
