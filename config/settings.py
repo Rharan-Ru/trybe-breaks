@@ -78,28 +78,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd74mco5bmbl3os',
-        'HOST': 'ec2-18-214-134-226.compute-1.amazonaws.com',
-        'PORT': 5432,
-        'USER': 'pvkxydmwyethzk',
-        'PASSWORD': 'e735befde6dab5eef90cb2ff6ac82620fa48de54b47f2c3ccfa1e6dce7d9f557',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://:p9a9bdd04417d5d48abb45e660a25437bf7e1226639372897ba79df07cb88af36@ec2-34-200-100-197.compute-1.amazonaws.com:18869',
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 }
 
