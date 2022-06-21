@@ -7,7 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
 
 
-
 def remove_duplicates(list1, list2):
     new_list = []
     for play in list1:
@@ -69,7 +68,6 @@ class MusicsView(View):
                 first_music = playlist.musics.all()[0].music_id
                 playlist.views += 1
                 playlist.save()
-                print('privado')
                 request.session[slug] = ''
                 context = {
                     'playlist': playlist,
@@ -81,7 +79,6 @@ class MusicsView(View):
         first_music = playlist.musics.all()[0].music_id
         playlist.views += 1
         playlist.save()
-        print('public')
         context = {
             'playlist': playlist,
             'first_music': first_music,
@@ -113,7 +110,6 @@ class PlayListView(View):
 @csrf_exempt
 def playlist_password(request, slug):
     if request.method == "POST":
-        print(request.POST)
         playlist = PlaylistModel.objects.get(slug=slug)
         playlist_password_input = request.POST['playlist-password-enter']
         if playlist.password == playlist_password_input:
@@ -126,7 +122,6 @@ def playlist_password(request, slug):
 @csrf_exempt
 def like_view(request, slug):
     if request.method == "POST":
-        print(slug)
         playlist = PlaylistModel.objects.get(slug=slug)
         playlist.likes += 1
         playlist.save()
@@ -137,7 +132,6 @@ def like_view(request, slug):
 @csrf_exempt
 def dislike_view(request, slug):
     if request.method == "POST":
-        print(slug)
         playlist = PlaylistModel.objects.get(slug=slug)
         playlist.likes -= 1
         playlist.save()
